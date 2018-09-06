@@ -1,7 +1,7 @@
 <template>
     <div class="main-space">
         <div class="background-letter noselect">
-            {{letters[letterIndex]}}
+            {{ getDisplayedLetter() }}
         </div>
         <img/>
     </div>

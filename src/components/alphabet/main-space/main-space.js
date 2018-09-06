@@ -9,4 +9,10 @@ export default {
             letters
         };
     },
+    methods:{
+        getDisplayedLetter(){
+            const letter = this.letters[this.letterIndex];
+            return `${letter}${letter.toLowerCase()}`;
+        }
+    }
 }
