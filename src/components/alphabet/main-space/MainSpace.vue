@@ -1,6 +1,9 @@
 <template>
-    <div>
-        {{letters[letterIndex]}}
+    <div class="main-space">
+        <div class="background-letter noselect">
+            {{letters[letterIndex]}}
+        </div>
+        <img/>
     </div>
 </template>
 
