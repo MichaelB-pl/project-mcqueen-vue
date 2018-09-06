@@ -1,5 +1,7 @@
 <template>
-<div>
+<div class="alphabet">
+    <LettersBar v-on:letterIndexChanged="onLetterIndexChanged($event)"/>
+    <MainSpace v-bind:letterIndex="letterIndex"/>
 </div>
 </template>
 

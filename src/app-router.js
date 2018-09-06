@@ -10,13 +10,13 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'menu',
+            name: 'app-menu',
             component: Menu
         },
         {
-          path: '/alphabet/:name',
-          name: 'alphabet',
-          component: Alphabet
+            path: '/alphabet/',
+            name: 'alphabet',
+            component: Alphabet
         }
     ]
 })

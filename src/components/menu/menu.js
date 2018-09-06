@@ -1,5 +1,5 @@
 export default {
-    name: 'menu',
+    name: 'app-menu',
     data() {
         return {
             greet: 'hello',
