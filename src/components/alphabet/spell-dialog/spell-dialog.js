@@ -5,15 +5,19 @@ export default {
     props: ['alphabet', 'letterIndex', 'imageIndex'],
     data() {
         const selectedLetterItem = this.alphabet[this.letterIndex];
+        const letter = selectedLetterItem.letter;
         const imageName = selectedLetterItem.names[this.imageIndex];
         const imageUri = selectedLetterItem.uris[this.imageIndex];
         const letters = imageName.split('');
 
         return {
             letters,
+            letter,
+            imageName,
             imageUri,
             displayedNameLastLetterIndex: -2,
-            isCurrentlyMovingNextLetter: false
+            isCurrentlyMovingNextLetter: false,
+            isCurrentlyPopingImage: false
         };
     },
     methods: {
@@ -37,23 +41,31 @@ export default {
 
             setTimeout(() => {
                 this.isCurrentlyMovingNextLetter = true;
-                console.log('timeout 01');
                 setTimeout(() => {
-                    console.log('timeout 02');
                     if (this.displayedNameLastLetterIndex < this.letters.length - 2) {
                         this.spellNextLetter(resolve);
                     } else {
-                        setTimeout(() => {
-                            resolve();
-                        }, 2000);
+                        this.isCurrentlyMovingNextLetter = false;
+                        this.displayedNameLastLetterIndex++;
+                        this.popImage(resolve);
                     }
                 }, 3500);
             }, 1000);
+        },
+
+        popImage(resolve) {
+            this.isCurrentlyPopingImage = true;
+
+            const audioUri = getLettersAudioUri(this.letter, this.imageName);
+            playAudio(audioUri);
+
+            setTimeout(() => {
+                resolve();
+            }, 2000);
         }
     },
     mounted() {
         this.startSpelling().then(() => {
-            console.log('resolved');
             this.$emit('spellingFinished');
         });
     }
