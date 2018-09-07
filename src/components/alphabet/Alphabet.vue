@@ -6,7 +6,8 @@
     <MainSpace v-bind:alphabet="alphabet"
         v-bind:letterIndex="letterIndex"
         v-bind:imageIndex="imageIndex" 
-        v-on:selectedImageClicked="onSelectedImageClicked()" />
+        v-on:selectedImageClicked="onSelectedImageClicked()"
+        v-on:backgroundLetterClicked="onBackgroundLetterClicked()" />
 
     <SpellBar v-bind:alphabet="alphabet"
         v-bind:letterIndex="letterIndex"

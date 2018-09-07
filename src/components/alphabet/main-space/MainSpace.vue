@@ -1,6 +1,7 @@
 <template>
     <div class="main-space">
-        <div class="background-letter noselect" v-if="imageIndex == -1">
+        <div class="background-letter noselect" v-if="imageIndex == -1"
+            v-on:click="$emit('backgroundLetterClicked')">
             {{ getDisplayedLetter() }}
         </div>
 

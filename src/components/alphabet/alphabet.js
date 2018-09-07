@@ -34,6 +34,10 @@ export default {
             this.saySelectedImage();
         },
 
+        onBackgroundLetterClicked() {
+            this.saySelectedLetter();
+        },
+
         onSelectedImageClicked() {
             this.imageIndex = -1;
         },
