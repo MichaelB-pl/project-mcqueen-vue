@@ -11,11 +11,19 @@
 
     <SpellBar v-bind:alphabet="alphabet"
         v-bind:letterIndex="letterIndex"
-        v-bind:imageIndex="imageIndex" />
+        v-bind:imageIndex="imageIndex" 
+        v-on:spellClicked="onSpellClicked()"/>
 
     <ImagesSpace v-bind:alphabet="alphabet"
         v-bind:letterIndex="letterIndex"
         v-on:imageSelected="onImageSelected($event)"/>
+
+    <transition name="dialog-in">
+        <SpellDialog v-if="isCurrentlySpelling"
+            v-bind:alphabet="alphabet"
+            v-bind:letterIndex="letterIndex"
+            v-bind:imageIndex="imageIndex" />
+    </transition>
 </div>
 </template>
 

@@ -9,8 +9,8 @@
     --color-primary-extra-light: #f2ffab;
     --color-accent: #790e8b;
     --transition-duration: 0.3s;
-    --transition-short-duration: 0.2s;
-    --transition-long-duration: 0.5s;
+    --transition-duration-short: 0.2s;
+    --transition-duration-long: 0.5s;
     --bar-size: 56px;
 }
 

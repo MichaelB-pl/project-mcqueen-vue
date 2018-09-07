@@ -2,6 +2,7 @@ import LettersBar from './letters-bar/LettersBar.vue';
 import MainSpace from './main-space/MainSpace.vue';
 import SpellBar from './spell-bar/SpellBar.vue';
 import ImagesSpace from './images-space/ImagesSpace.vue';
+import SpellDialog from './spell-dialog/SpellDialog.vue';
 
 import getAlphabet from './models/alphabet';
 import { playAudio, getLettersAudioUri } from '../../assets/audio/player';
@@ -12,14 +13,16 @@ export default {
         LettersBar,
         MainSpace,
         SpellBar,
-        ImagesSpace
+        ImagesSpace,
+        SpellDialog
     },
     data() {
         const alphabet = getAlphabet();
         return {
             alphabet,
             letterIndex: 0,
-            imageIndex: -1
+            imageIndex: -1,
+            isCurrentlySpelling: false
         };
     },
     methods: {
@@ -55,6 +58,10 @@ export default {
             const selectedImageName = names[this.imageIndex];
             const src = getLettersAudioUri(letter, selectedImageName);
             playAudio(src);
+        },
+
+        onSpellClicked() {
+            this.isCurrentlySpelling = true;
         }
     }
 }

@@ -1,0 +1,77 @@
+.spell-dialog {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-primary-extra-light);
+    position: absolute;
+    z-index: 200;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.letters-bar {
+    width: 100%;
+    height: var(--bar-size);
+    background-color: var(--color-primary);
+    box-shadow: 0 0 16px 0 black;
+    z-index: 205;
+}
+
+.main-space {
+    width: 100%;
+    height: calc(var(--alphabeth-dp) * 5);
+    z-index: 201;
+}
+
+.spell-bar {
+    width: 100%;
+    height: var(--bar-size);
+    background-color: var(--color-primary);
+    box-shadow: 0 0 4px 0 black;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(var(--bar-size) * 0.5);
+    color: white;
+    font-weight: bold;
+    z-index: 204;
+}
+
+.images-space {
+    width: 100%;
+    height: calc(var(--alphabeth-dp) * 3);
+    background-color: var(--color-primary-light);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 202;
+}
+
+@media screen and (orientation:landscape) {
+    .main-space {
+        height: calc(var(--alphabeth-dp) * 6);
+    }
+    .images-space {
+        height: calc(var(--alphabeth-dp) * 2);
+    }
+    @media(max-height: 480px) {
+        .letters-bar {
+            height: calc(var(--bar-size) * 0.8);
+        }
+        .main-space {
+            height: calc(var(--alphabeth-dp) * 6 + var(--bar-size) * 0.2);
+        }
+        .spell-bar {
+            height: calc(var(--bar-size) * 0.5);
+            font-size: calc(var(--bar-size) * 0.35);
+        }
+        .images-space {
+            height: calc(var(--alphabeth-dp) * 2 + var(--bar-size) * 0.5);
+        }
+    }
+}
