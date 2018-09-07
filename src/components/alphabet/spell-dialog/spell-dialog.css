@@ -39,6 +39,63 @@
     color: white;
     font-weight: bold;
     z-index: 204;
+    position: relative;
+}
+
+.letters-wrapper {
+    height: 100%;
+    width: auto;
+    /* background-color: red; */
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.invisible-letter {
+    color: transparent;
+}
+
+.floating-wrapper {
+    position: absolute;
+    /* background-color: #7777; */
+    top: calc(var(--alphabeth-dp) * -3);
+}
+
+.desired-letter {
+    font-size: calc(var(--bar-size) * 2);
+    color: #777;
+}
+
+.unnecessary-letter {
+    color: transparent;
+    font-size: 0;
+}
+
+.animate-letters-checkbox {
+    display: none;
+    position: absolute;
+    /* top: 0;
+    left: 0; */
+}
+
+.animate-letters-checkbox:not(:checked)~.floating-wrapper {
+    color: blue;
+    animation: floating-wrapper-jump-in .5s ease;
+}
+
+.animate-letters-checkbox:checked~.floating-wrapper {
+    top: 0;
+    transition: top 3s;
+}
+
+.animate-letters-checkbox:checked~.floating-wrapper>p {
+    font-size: calc(var(--bar-size) * 0.5);
+    transition: font-size 3s, color 3s;
+}
+
+.animate-letters-checkbox:checked~.floating-wrapper>.desired-letter {
+    color: #fff;
 }
 
 .images-space {
@@ -73,5 +130,17 @@
         .images-space {
             height: calc(var(--alphabeth-dp) * 2 + var(--bar-size) * 0.5);
         }
+    }
+}
+
+@keyframes floating-wrapper-jump-in {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(2);
+    }
+    100% {
+        transform: scale(1);
     }
 }

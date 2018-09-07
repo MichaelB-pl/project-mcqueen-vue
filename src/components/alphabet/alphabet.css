@@ -1,5 +1,5 @@
 :root{
-    --alphabeth-dp: calc((100% - var(--bar-size) * 2) / 8);
+    --alphabeth-dp: calc((100vh - var(--bar-size) * 2) / 8);
 }
 
 .alphabet{

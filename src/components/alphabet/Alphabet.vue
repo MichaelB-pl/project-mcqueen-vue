@@ -22,7 +22,8 @@
         <SpellDialog v-if="isCurrentlySpelling"
             v-bind:alphabet="alphabet"
             v-bind:letterIndex="letterIndex"
-            v-bind:imageIndex="imageIndex" />
+            v-bind:imageIndex="imageIndex" 
+            v-on:spellingFinished="isCurrentlySpelling = false"/>
     </transition>
 </div>
 </template>
