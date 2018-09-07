@@ -1,9 +1,8 @@
-import getAlphabet from '../models/alphabet';
-
 export default {
     name: 'letters-bar',
+    props: ['alphabet'],
     data() {
-        const letters = getAlphabet().map(letter => letter.letter);
+        const letters = this.alphabet.map(letter => letter.letter);
         return {
             letters
         };

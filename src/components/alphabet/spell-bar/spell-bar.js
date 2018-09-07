@@ -1,11 +1,9 @@
-import getAlphabet from '../models/alphabet';
-
 export default {
     name: 'spell-bar',
-    props: ['letterIndex', 'imageIndex'],
-    methods:{
-        getImageSpell(){
-            const letter = getAlphabet()[this.letterIndex];
+    props: ['alphabet', 'letterIndex', 'imageIndex'],
+    methods: {
+        getImageSpell() {
+            const letter = this.alphabet[this.letterIndex];
             return letter.names[this.imageIndex];
         }
     }

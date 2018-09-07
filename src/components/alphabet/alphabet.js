@@ -4,6 +4,7 @@ import SpellBar from './spell-bar/SpellBar.vue';
 import ImagesSpace from './images-space/ImagesSpace.vue';
 
 import getAlphabet from './models/alphabet';
+import { playAudio, getLettersAudioUri } from '../../assets/audio/player';
 
 export default {
     name: 'alphabet',
@@ -14,10 +15,9 @@ export default {
         ImagesSpace
     },
     data() {
-        const letters = getAlphabet();
-
+        const alphabet = getAlphabet();
         return {
-            letters,
+            alphabet,
             letterIndex: 0,
             imageIndex: -1
         };
@@ -26,10 +26,31 @@ export default {
         onLetterIndexChanged(index) {
             this.imageIndex = -1;
             this.letterIndex = index;
+            this.saySelectedLetter();
         },
 
         onImageSelected(index) {
             this.imageIndex = index;
+            this.saySelectedImage();
+        },
+
+        onSelectedImageClicked() {
+            this.imageIndex = -1;
+        },
+
+        saySelectedLetter() {
+            const letter = this.alphabet[this.letterIndex].letter;
+            const src = getLettersAudioUri(letter, letter);
+            playAudio(src);
+        },
+
+        saySelectedImage() {
+            const selectedLetterItem = this.alphabet[this.letterIndex];
+            const letter = selectedLetterItem.letter;
+            const names = selectedLetterItem.names;
+            const selectedImageName = names[this.imageIndex];
+            const src = getLettersAudioUri(letter, selectedImageName);
+            playAudio(src);
         }
     }
 }

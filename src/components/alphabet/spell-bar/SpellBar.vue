@@ -1,5 +1,5 @@
 <template>
-<div class="spell-bar">
+<div class="spell-bar noselect">
     {{ getImageSpell() }}
 </div>
 </template>

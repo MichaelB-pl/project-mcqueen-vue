@@ -2,7 +2,7 @@ let audio = new Audio('');
 
 export function playAudio(src) {
     audio.pause();
-    audio = new Audio(src);
+    audio = new Audio(require(`./${src}`));
     audio.play();
 }
 
@@ -13,5 +13,5 @@ export function pauseAudio() {
 export function getLettersAudioUri(letter, audioName) {
     const letterSm = letter.toLowerCase();
     const audioNameSm = audioName.toLowerCase();
-    return `src/res/audio/letters/${letterSm}/${audioNameSm}.mp3`
+    return `letters/${letterSm}/${audioNameSm}.mp3`
 }

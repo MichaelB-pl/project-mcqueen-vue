@@ -1,13 +1,19 @@
 <template>
 <div class="alphabet">
-    <LettersBar v-on:letterIndexChanged="onLetterIndexChanged($event)" />
+    <LettersBar v-on:letterIndexChanged="onLetterIndexChanged($event)"
+        v-bind:alphabet="alphabet" />
 
-    <MainSpace v-bind:letterIndex="letterIndex" />
+    <MainSpace v-bind:alphabet="alphabet"
+        v-bind:letterIndex="letterIndex"
+        v-bind:imageIndex="imageIndex" 
+        v-on:selectedImageClicked="onSelectedImageClicked()" />
 
-    <SpellBar v-bind:letterIndex="letterIndex"
+    <SpellBar v-bind:alphabet="alphabet"
+        v-bind:letterIndex="letterIndex"
         v-bind:imageIndex="imageIndex" />
 
-    <ImagesSpace v-bind:letterIndex="letterIndex"
+    <ImagesSpace v-bind:alphabet="alphabet"
+        v-bind:letterIndex="letterIndex"
         v-on:imageSelected="onImageSelected($event)"/>
 </div>
 </template>
