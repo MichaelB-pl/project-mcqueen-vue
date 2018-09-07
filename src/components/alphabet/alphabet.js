@@ -1,6 +1,7 @@
 import LettersBar from './letters-bar/LettersBar.vue';
 import MainSpace from './main-space/MainSpace.vue';
 import SpellBar from './spell-bar/SpellBar.vue';
+import ImagesSpace from './images-space/ImagesSpace.vue';
 
 import getAlphabet from './models/alphabet';
 
@@ -9,7 +10,8 @@ export default {
     components: {
         LettersBar,
         MainSpace,
-        SpellBar
+        SpellBar,
+        ImagesSpace
     },
     data() {
         const letters = getAlphabet();
@@ -22,7 +24,12 @@ export default {
     },
     methods: {
         onLetterIndexChanged(index) {
+            this.imageIndex = -1;
             this.letterIndex = index;
+        },
+
+        onImageSelected(index) {
+            this.imageIndex = index;
         }
     }
 }
