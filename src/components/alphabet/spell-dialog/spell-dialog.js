@@ -27,6 +27,12 @@ export default {
             return this.displayedNameLastLetterIndex + 1;
         },
 
+        getSelectedImageUri() {
+            const letter = this.alphabet[this.letterIndex];
+            const uri = letter.uris[this.imageIndex];
+            return uri;
+        },
+
         startSpelling() {
             return new Promise((resolve) => {
                 setTimeout(() => {

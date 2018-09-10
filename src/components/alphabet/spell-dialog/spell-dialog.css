@@ -8,6 +8,7 @@
     background-color: var(--color-primary-extra-light);
     position: absolute;
     z-index: 200;
+    overflow: hidden;
     top: 0;
     left: 0;
     display: flex;
@@ -31,6 +32,15 @@
     height: calc(var(--alphabeth-dp) * 5);
     z-index: 201;
     transition: height var(--transition-duration);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-space>img {
+    max-width: 0%;
+    max-height: 0%;
 }
 
 .spell-bar {
@@ -83,7 +93,12 @@
     position: absolute;
 }
 
-.unnecessary-components-checkbox{
+.unnecessary-components-checkbox {
+    display: none;
+    position: absolute;
+}
+
+.pop-image-checkbox {
     position: absolute;
     z-index: 300;
 }
@@ -123,7 +138,6 @@
         }
     }
 }
-
 
 .unnecessary-components-checkbox:not(:checked)~.letters-bar {
     height: 0;
@@ -170,4 +184,38 @@
     100% {
         transform: scale(1);
     }
+}
+
+@keyframes image-jump-in {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes letters-jump {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pop-image-checkbox:checked~.main-space>img {
+    max-width: 90%;
+    max-height: 90%;
+    animation: image-jump-in .5s ease;
+}
+
+.pop-image-checkbox:checked~.spell-bar>.letters-wrapper {
+    animation: letters-jump .5s ease;
 }
