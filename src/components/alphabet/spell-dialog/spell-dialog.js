@@ -17,7 +17,8 @@ export default {
             imageUri,
             displayedNameLastLetterIndex: -2,
             isCurrentlyMovingNextLetter: false,
-            isCurrentlyPopingImage: false
+            isCurrentlyPopingImage: false,
+            isViewDestroyed: false
         };
     },
     methods: {
@@ -26,7 +27,7 @@ export default {
         },
 
         startSpelling() {
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
                 this.spellNextLetter(resolve);
             });
         },
@@ -40,16 +41,22 @@ export default {
             playAudio(audioUri);
 
             setTimeout(() => {
+                if (this.isViewDestroyed) {
+                    resolve();
+                }
+
                 this.isCurrentlyMovingNextLetter = true;
                 setTimeout(() => {
-                    if (this.displayedNameLastLetterIndex < this.letters.length - 2) {
+                    if (this.isViewDestroyed) {
+                        resolve();
+                    } else if (this.displayedNameLastLetterIndex < this.letters.length - 2) {
                         this.spellNextLetter(resolve);
                     } else {
                         this.isCurrentlyMovingNextLetter = false;
                         this.displayedNameLastLetterIndex++;
                         this.popImage(resolve);
                     }
-                }, 3500);
+                }, 2300);
             }, 1000);
         },
 
@@ -60,13 +67,17 @@ export default {
             playAudio(audioUri);
 
             setTimeout(() => {
-                resolve();
-            }, 2000);
+                resolve(true);
+            }, 1000);
         }
     },
     mounted() {
-        this.startSpelling().then(() => {
-            this.$emit('spellingFinished');
+        this.startSpelling().then(resolve => {
+            if (resolve)
+                this.$emit('spellingFinished');
         });
+    },
+    beforeDestroy() {
+        this.isViewDestroyed = true;
     }
 }

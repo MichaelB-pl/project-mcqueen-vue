@@ -86,12 +86,12 @@
 
 .animate-letters-checkbox:checked~.floating-wrapper {
     top: 0;
-    transition: top 3s;
+    transition: top 2s;
 }
 
 .animate-letters-checkbox:checked~.floating-wrapper>p {
     font-size: calc(var(--bar-size) * 0.5);
-    transition: font-size 3s, color 3s;
+    transition: font-size 2s, color 2s;
 }
 
 .animate-letters-checkbox:checked~.floating-wrapper>.desired-letter {
