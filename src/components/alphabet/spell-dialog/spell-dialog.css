@@ -1,3 +1,7 @@
+:root {
+    --letter-animation-time: 2s;
+}
+
 .spell-dialog {
     width: 100vw;
     height: 100vh;
@@ -10,6 +14,7 @@
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: stretch;
+    transition: height var(--transition-duration);
 }
 
 .letters-bar {
@@ -18,12 +23,14 @@
     background-color: var(--color-primary);
     box-shadow: 0 0 16px 0 black;
     z-index: 205;
+    transition: height var(--transition-duration);
 }
 
 .main-space {
     width: 100%;
     height: calc(var(--alphabeth-dp) * 5);
     z-index: 201;
+    transition: height var(--transition-duration);
 }
 
 .spell-bar {
@@ -40,12 +47,12 @@
     font-weight: bold;
     z-index: 204;
     position: relative;
+    transition: height var(--transition-duration), font-size var(--transition-duration);
 }
 
 .letters-wrapper {
     height: 100%;
     width: auto;
-    /* background-color: red; */
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
@@ -58,8 +65,7 @@
 
 .floating-wrapper {
     position: absolute;
-    /* background-color: #7777; */
-    top: calc(var(--alphabeth-dp) * -3);
+    top: calc(var(--alphabeth-dp) * -4 - var(--bar-size));
 }
 
 .desired-letter {
@@ -75,27 +81,11 @@
 .animate-letters-checkbox {
     display: none;
     position: absolute;
-    /* top: 0;
-    left: 0; */
 }
 
-.animate-letters-checkbox:not(:checked)~.floating-wrapper {
-    color: blue;
-    animation: floating-wrapper-jump-in .5s ease;
-}
-
-.animate-letters-checkbox:checked~.floating-wrapper {
-    top: 0;
-    transition: top 2s;
-}
-
-.animate-letters-checkbox:checked~.floating-wrapper>p {
-    font-size: calc(var(--bar-size) * 0.5);
-    transition: font-size 2s, color 2s;
-}
-
-.animate-letters-checkbox:checked~.floating-wrapper>.desired-letter {
-    color: #fff;
+.unnecessary-components-checkbox{
+    position: absolute;
+    z-index: 300;
 }
 
 .images-space {
@@ -107,6 +97,7 @@
     justify-content: space-around;
     align-items: center;
     z-index: 202;
+    transition: height var(--transition-duration);
 }
 
 @media screen and (orientation:landscape) {
@@ -131,6 +122,42 @@
             height: calc(var(--alphabeth-dp) * 2 + var(--bar-size) * 0.5);
         }
     }
+}
+
+
+.unnecessary-components-checkbox:not(:checked)~.letters-bar {
+    height: 0;
+}
+
+.unnecessary-components-checkbox:not(:checked)~.main-space {
+    height: calc(var(--alphabeth-dp) * 7 + var(--bar-size));
+}
+
+.unnecessary-components-checkbox:not(:checked)~.spell-bar {
+    height: calc(var(--alphabeth-dp) + var(--bar-size));
+    font-size: calc(var(--bar-size) * 0.5);
+}
+
+.unnecessary-components-checkbox:not(:checked)~.images-space {
+    height: 0;
+}
+
+.animate-letters-checkbox:not(:checked)~.floating-wrapper {
+    animation: floating-wrapper-jump-in .5s ease;
+}
+
+.animate-letters-checkbox:checked~.floating-wrapper {
+    top: 0;
+    transition: top var(--letter-animation-time);
+}
+
+.animate-letters-checkbox:checked~.floating-wrapper>p {
+    font-size: calc(var(--bar-size) * 0.5);
+    transition: font-size var(--letter-animation-time), color var(--letter-animation-time);
+}
+
+.animate-letters-checkbox:checked~.floating-wrapper>.desired-letter {
+    color: #fff;
 }
 
 @keyframes floating-wrapper-jump-in {

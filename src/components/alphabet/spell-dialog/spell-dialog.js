@@ -16,7 +16,8 @@ export default {
             imageName,
             imageUri,
             displayedNameLastLetterIndex: -2,
-            isCurrentlyMovingNextLetter: false,
+            areUnnecessaryComponentsVisible: true,
+            isCurrentlyMovingNextLetter: true,
             isCurrentlyPopingImage: false,
             isViewDestroyed: false
         };
@@ -28,21 +29,22 @@ export default {
 
         startSpelling() {
             return new Promise((resolve) => {
-                this.spellNextLetter(resolve);
+                setTimeout(() => {
+                    this.areUnnecessaryComponentsVisible = false;
+                    setTimeout(() => {
+                        this.spellNextLetter(resolve);
+                    }, 300);
+                }, 300);
             });
         },
 
         spellNextLetter(resolve) {
-            this.isCurrentlyMovingNextLetter = false;
-            this.displayedNameLastLetterIndex++;
-
-            const nextLetter = this.letters[this.getNextLetterIndex()];
-            const audioUri = getLettersAudioUri(nextLetter, nextLetter);
-            playAudio(audioUri);
+            this.showAndSayNextLetter();
 
             setTimeout(() => {
                 if (this.isViewDestroyed) {
                     resolve();
+                    return;
                 }
 
                 this.isCurrentlyMovingNextLetter = true;
@@ -60,6 +62,15 @@ export default {
             }, 1000);
         },
 
+        showAndSayNextLetter() {
+            this.isCurrentlyMovingNextLetter = false;
+            this.displayedNameLastLetterIndex++;
+
+            const nextLetter = this.letters[this.getNextLetterIndex()];
+            const audioUri = getLettersAudioUri(nextLetter, nextLetter);
+            playAudio(audioUri);
+        },
+
         popImage(resolve) {
             this.isCurrentlyPopingImage = true;
 
@@ -67,7 +78,10 @@ export default {
             playAudio(audioUri);
 
             setTimeout(() => {
-                resolve(true);
+                this.areUnnecessaryComponentsVisible = true;
+                setTimeout(() => {
+                    resolve(true);
+                }, 300);
             }, 1000);
         }
     },

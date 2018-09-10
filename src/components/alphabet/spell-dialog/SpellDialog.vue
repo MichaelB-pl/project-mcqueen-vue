@@ -1,5 +1,7 @@
 <template>
     <div class="spell-dialog">
+            <input class="unnecessary-components-checkbox" type="checkbox" 
+                v-bind:checked="areUnnecessaryComponentsVisible"/>
         <div class="letters-bar" />
         <div class="main-space"></div>
         <div class="spell-bar noselect">
