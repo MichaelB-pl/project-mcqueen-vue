@@ -79,7 +79,7 @@
 }
 
 .desired-letter {
-    font-size: calc(var(--bar-size) * 2);
+    font-size: calc(var(--alphabeth-dp) * 4);
     color: #777;
 }
 
@@ -149,7 +149,7 @@
 
 .unnecessary-components-checkbox:not(:checked)~.spell-bar {
     height: calc(var(--alphabeth-dp) + var(--bar-size));
-    font-size: calc(var(--bar-size) * 0.5);
+    font-size: calc(var(--bar-size));
 }
 
 .unnecessary-components-checkbox:not(:checked)~.images-space {
@@ -166,7 +166,7 @@
 }
 
 .animate-letters-checkbox:checked~.floating-wrapper>p {
-    font-size: calc(var(--bar-size) * 0.5);
+    font-size: calc(var(--bar-size));
     transition: font-size var(--letter-animation-time), color var(--letter-animation-time);
 }
 
