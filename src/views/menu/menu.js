@@ -10,7 +10,11 @@ export default {
 
 const pages = [
     {
-        name: 'alphabet',
+        name: 'alfabet',
         path: '/alphabet'
+    },
+    {
+        name: 'cyfry',
+        path: '/numbers'
     }
 ];
