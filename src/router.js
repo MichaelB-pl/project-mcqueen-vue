@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Menu from './components/menu/Menu.vue';
-import Alphabet from './components/alphabet/Alphabet.vue';
+import Menu from './views/menu/Menu.vue';
+import Alphabet from './views/alphabet/Alphabet.vue';
 
 Vue.use(Router);
 

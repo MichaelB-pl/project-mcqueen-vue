@@ -1,10 +1,10 @@
-import LettersBar from './letters-bar/LettersBar.vue';
-import MainSpace from './main-space/MainSpace.vue';
-import SpellBar from './spell-bar/SpellBar.vue';
-import ImagesSpace from './images-space/ImagesSpace.vue';
-import SpellDialog from './spell-dialog/SpellDialog.vue';
+import LettersBar from '../../components/alphabet/letters-bar/LettersBar.vue';
+import MainSpace from '../../components/alphabet/main-space/MainSpace.vue';
+import SpellBar from '../../components/alphabet/spell-bar/SpellBar.vue';
+import ImagesSpace from '../../components/alphabet/images-space/ImagesSpace.vue';
+import SpellDialog from '../../components/alphabet/spell-dialog/SpellDialog.vue';
 
-import getAlphabet from './models/alphabet';
+import getAlphabet from '../../components/alphabet/models/alphabet';
 import { playAudio, getLettersAudioUri } from '../../assets/audio/player';
 
 export default {
