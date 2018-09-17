@@ -1,6 +1,6 @@
 <template>
-<div>
-    <h1>Numbers</h1>
+<div class="numbers">
+    <NumbersBar />
 </div>
 </template>
 
