@@ -1,7 +1,11 @@
 <template>
 <div class="numbers-bar">
-    <div class="number-item noselect" v-for="(number, index) in numbers" :key="index">
-        {{ number }}
+    <div class="number-item noselect" v-for="(number, index) in numbers" 
+    :key="index"
+    v-on:click="$emit('numberSelected',index)">
+        <p>
+            {{ number }}
+        </p>
     </div>
 </div>
 </template>

@@ -1,0 +1,26 @@
+.images-space {
+    width: 100%;
+    height: calc(100% - var(--item-size));
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@media(max-width: 480px) {
+    .images-space {
+        height: calc(100% - var(--item-size) * 2);
+    }
+}
+
+@media screen and (orientation:landscape) {
+    .images-space {
+        width: calc(100% - var(--item-size));
+        height: 100%;
+    }
+    @media(max-height: 480px) {
+        .images-space {
+            width: calc(100% - var(--item-size) * 2);
+        }
+    }
+}

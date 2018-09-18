@@ -1,6 +1,7 @@
 <template>
 <div class="numbers">
-    <NumbersBar />
+    <NumbersBar :numbers="numbers" v-on:numberSelected="onNumberSelected($event)" />
+    <ImagesSpace :selectedNumber="getSelectedNumber()" />
 </div>
 </template>
 
