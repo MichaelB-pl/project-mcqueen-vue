@@ -3,10 +3,11 @@
     height: var(--item-size);
     background-color: var(--color-primary);
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     justify-content: center;
     align-items: center;
     box-shadow: 0 0 16px 0 black;
+    z-index: 100;
 }
 
 .number-item {
@@ -37,12 +38,10 @@
     .numbers-bar {
         width: var(--item-size);
         height: 100%;
-        flex-direction: column;
     }
     @media(max-height: 480px) {
         .numbers-bar {
             width: calc(var(--item-size) * 2);
-            flex-flow: row wrap;
         }
     }
 }
