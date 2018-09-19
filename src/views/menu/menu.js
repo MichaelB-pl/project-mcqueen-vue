@@ -8,10 +8,10 @@ export default {
 }
 
 const pages = [
-
+    pageConstructor('Alfabet', '/alphabet')
 ];
 
-const pageConstructor = (name, path) => {
+function pageConstructor(name, path) {
     return {
         name,
         path
