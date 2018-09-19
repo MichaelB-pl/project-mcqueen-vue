@@ -23,7 +23,7 @@ body {
   height: 100vh;
   background-color: var(--color-primary-extra-light);
   overflow: hidden;
-  font-family: 'Patrick Hand', cursive;
+  font-family: cursive;
 }
 
 .noselect {
