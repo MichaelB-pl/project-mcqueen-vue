@@ -5,9 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "vue-cli-service build && node server.js"
   },
   "dependencies": {
+    "express": "^4.16.3",
+    "express-history-api-fallback": "^2.2.1",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1"
   },
