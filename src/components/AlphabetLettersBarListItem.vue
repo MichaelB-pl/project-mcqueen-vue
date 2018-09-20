@@ -1,6 +1,6 @@
 <template>
 <li class="alphabet__letters-bar-list-item noselect">
-    {{letter}}
+    {{ letter }}
 </li>
 </template>
 

@@ -5,9 +5,8 @@
         @letterIndexChanged="onLetterIndexChanged($event)" 
     />
 
-    <MainSpace 
-        :alphabet="alphabet" 
-        :letterIndex="letterIndex" 
+    <AlphabetMainSpace 
+        :alphabetItem="getSelectedAlphabetItem()" 
         :imageIndex="imageIndex" 
         @selectedImageClicked="onSelectedImageClicked()" 
         @backgroundLetterClicked="onBackgroundLetterClicked()" 
@@ -40,7 +39,7 @@
 
 <script>
 import AlphabetLettersBar from '../components/AlphabetLettersBar.vue';
-import MainSpace from '../components/AlphabetMainSpace.vue';
+import AlphabetMainSpace from '../components/AlphabetMainSpace.vue';
 import SpellBar from '../components/AlphabetSpellBar.vue';
 import ImagesSpace from '../components/AlphabetImagesSpace.vue';
 import SpellDialog from '../components/AlphabetSpellDialog.vue';
@@ -55,7 +54,7 @@ export default {
     name: 'Alphabet',
     components: {
         AlphabetLettersBar,
-        MainSpace,
+        AlphabetMainSpace,
         SpellBar,
         ImagesSpace,
         SpellDialog
@@ -72,6 +71,10 @@ export default {
     methods: {
         getLetters(){
             return this.alphabet.map(letter=>letter.letter);
+        },
+
+        getSelectedAlphabetItem(){
+            return this.alphabet[this.letterIndex];
         },
 
         onLetterIndexChanged(index) {

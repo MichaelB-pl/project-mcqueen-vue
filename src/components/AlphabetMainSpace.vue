@@ -1,27 +1,44 @@
 <template>
-<div class="main-space">
-    <div class="background-letter noselect" v-if="imageIndex == -1" @click="$emit('backgroundLetterClicked')">
+<div class="alphabet__main-space">
+    <div 
+        v-if="imageIndex === -1" 
+        class="alphabet__main-space-background-letter noselect" 
+        @click="$emit('backgroundLetterClicked')"
+    >
         {{ getDisplayedLetter() }}
     </div>
 
-    <img :src="getSelectedImageUri()"
-            @click="$emit('selectedImageClicked')"/>
+    <img 
+        v-if="imageIndex > -1" 
+        :src="getSelectedImageUri()"
+        @click="$emit('selectedImageClicked')"
+    />
     </div>
 </template>
 
 <script>
+import AlphabetItem from '../models/alphabet/alphabet-item';
+
 export default {
-    name: 'main-space',
-    props: ['alphabet', 'letterIndex', 'imageIndex'],
+    name: 'AlphabetMainSpace',
+    props: {
+        alphabetItem: {
+            type: AlphabetItem,
+            required: true
+        },
+        imageIndex: {
+            type: Number,
+            required: true
+        }
+    },
     methods: {
         getDisplayedLetter() {
-            const letter = this.alphabet[this.letterIndex].letter;
-            return `${letter}${letter.toLowerCase()}`;
+            const letter = this.alphabetItem.letter;
+            return `${letter.toUpperCase()}${letter.toLowerCase()}`;
         },
 
         getSelectedImageUri() {
-            const letter = this.alphabet[this.letterIndex];
-            const uri = letter.uris[this.imageIndex];
+            const uri = this.alphabetItem.uris[this.imageIndex];
             return uri;
         }
     }
@@ -29,7 +46,7 @@ export default {
 </script>
 
 <style scoped>
- .main-space {
+ .alphabet__main-space {
      width: 100%;
      height: calc(var(--alphabeth-dp) * 5);
      position: relative;
@@ -41,9 +58,9 @@ export default {
      transition: height var(--transition-duration);
  }
 
- .background-letter {
-     width: 100%;
-     height: 100%;
+ .alphabet__main-space-background-letter {
+     width: auto;
+     height: auto;
      color: #0003;
      position: absolute;
      font-size: 40vmin;
@@ -54,19 +71,19 @@ export default {
      align-items: center;
  }
 
- .main-space>img {
+ .alphabet__main-space>img {
      max-width: 90%;
      max-height: 90%;
      z-index: 3;
  }
 
  @media screen and (orientation:landscape) {
-     .main-space {
+     .alphabet__main-space {
          height: calc(var(--alphabeth-dp) * 6);
      }
 
      @media(max-height: 480px) {
-         .main-space {
+         .alphabet__main-space {
              height: calc(var(--alphabeth-dp) * 6 + var(--bar-size) * 0.2);
          }
      }
