@@ -1,26 +1,38 @@
 <template>
-<div class="spell-bar noselect">
-    <p v-if="imageIndex > -1" @click="$emit('spellClicked')">
+<div class="alphabet__spell-bar noselect">
+    <p v-if="imageIndex > -1" 
+        @click="$emit('spellClicked')"
+    >
         {{ getImageSpell() }}
     </p>
 </div>
 </template>
 
 <script>
- export default {
-     name: 'spell-bar',
-     props: ['alphabet', 'letterIndex', 'imageIndex'],
-     methods: {
-         getImageSpell() {
-             const letter = this.alphabet[this.letterIndex];
-             return letter.names[this.imageIndex];
-         }
-     }
- }
+import AlphabetItem from '../models/alphabet/alphabet-item';
+
+export default {
+    name: 'AlphabetSpellBar',
+    props: {
+        alphabetItem: {
+            type: AlphabetItem,
+            required: true
+        },
+        imageIndex: {
+            type: Number,
+            required: true
+        }
+    },
+    methods: {
+        getImageSpell() {
+            return this.alphabetItem.names[this.imageIndex];
+        }
+    }
+}
 </script>
 
 <style scoped>
-.spell-bar {
+.alphabet__spell-bar {
     width: 100%;
     height: var(--bar-size);
     background-color: var(--color-primary);
@@ -37,7 +49,7 @@
 }
 
 @media screen and (orientation:landscape) and (max-height: 480px) {
-    .spell-bar {
+    .alphabet__spell-bar {
         height: calc(var(--bar-size) * 0.5);
         font-size: calc(var(--bar-size) * 0.35);
     }

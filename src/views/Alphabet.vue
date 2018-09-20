@@ -12,10 +12,9 @@
         @backgroundLetterClicked="onBackgroundLetterClicked()" 
     />
 
-    <SpellBar 
-        :alphabet="alphabet" 
-        :letterIndex="letterIndex" 
-        :imageIndex="imageIndex" 
+    <AlphabetSpellBar 
+        :alphabetItem="getSelectedAlphabetItem()" 
+        :imageIndex="imageIndex"  
         @spellClicked="onSpellClicked()" 
     />
 
@@ -40,7 +39,7 @@
 <script>
 import AlphabetLettersBar from '../components/AlphabetLettersBar.vue';
 import AlphabetMainSpace from '../components/AlphabetMainSpace.vue';
-import SpellBar from '../components/AlphabetSpellBar.vue';
+import AlphabetSpellBar from '../components/AlphabetSpellBar.vue';
 import ImagesSpace from '../components/AlphabetImagesSpace.vue';
 import SpellDialog from '../components/AlphabetSpellDialog.vue';
 
@@ -55,7 +54,7 @@ export default {
     components: {
         AlphabetLettersBar,
         AlphabetMainSpace,
-        SpellBar,
+        AlphabetSpellBar,
         ImagesSpace,
         SpellDialog
     },
