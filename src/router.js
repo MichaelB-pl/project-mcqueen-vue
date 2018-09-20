@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import MainMenu from './views/MainMenu.vue';
-import Alphabet from './views/alphabet/Alphabet.vue';
+import Alphabet from './views/Alphabet.vue';
 
 Vue.use(Router)
 
@@ -16,7 +16,7 @@ export default new Router({
     },
     {
       path: '/alphabet/',
-      name: 'alphabet',
+      name: 'Alphabet',
       component: Alphabet
     }
   ]

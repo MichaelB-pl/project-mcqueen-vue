@@ -1,34 +1,58 @@
 <template>
 <div class="alphabet">
-    <LettersBar v-on:letterIndexChanged="onLetterIndexChanged($event)" v-bind:alphabet="alphabet" />
+    <LettersBar 
+        :alphabet="alphabet" 
+        @:letterIndexChanged="onLetterIndexChanged($event)" 
+    />
 
-    <MainSpace v-bind:alphabet="alphabet" v-bind:letterIndex="letterIndex" v-bind:imageIndex="imageIndex" v-on:selectedImageClicked="onSelectedImageClicked()" v-on:backgroundLetterClicked="onBackgroundLetterClicked()" />
+    <MainSpace 
+        :alphabet="alphabet" 
+        :letterIndex="letterIndex" 
+        :imageIndex="imageIndex" 
+        @:selectedImageClicked="onSelectedImageClicked()" 
+        @:backgroundLetterClicked="onBackgroundLetterClicked()" 
+    />
 
-    <SpellBar v-bind:alphabet="alphabet" v-bind:letterIndex="letterIndex" v-bind:imageIndex="imageIndex" v-on:spellClicked="onSpellClicked()" />
+    <SpellBar 
+        :alphabet="alphabet" 
+        :letterIndex="letterIndex" 
+        :imageIndex="imageIndex" 
+        @:spellClicked="onSpellClicked()" 
+    />
 
-    <ImagesSpace v-bind:alphabet="alphabet" v-bind:letterIndex="letterIndex" v-on:imageSelected="onImageSelected($event)" />
+    <ImagesSpace 
+        :alphabet="alphabet" 
+        :letterIndex="letterIndex" 
+        @:imageSelected="onImageSelected($event)" 
+    />
 
     <transition name="dialog-in">
-        <SpellDialog v-if="isCurrentlySpelling" v-bind:alphabet="alphabet" v-bind:letterIndex="letterIndex" v-bind:imageIndex="imageIndex" v-on:spellingFinished="isCurrentlySpelling = false" />
+        <SpellDialog 
+            v-if="isCurrentlySpelling" 
+            :alphabet="alphabet" 
+            :letterIndex="letterIndex" 
+            :imageIndex="imageIndex" 
+            @:spellingFinished="isCurrentlySpelling = false" 
+        />
     </transition>
 </div>
 </template>
 
 <script>
-import LettersBar from '../../components/alphabet/letters-bar/LettersBar.vue';
-import MainSpace from '../../components/alphabet/main-space/MainSpace.vue';
-import SpellBar from '../../components/alphabet/spell-bar/SpellBar.vue';
-import ImagesSpace from '../../components/alphabet/images-space/ImagesSpace.vue';
-import SpellDialog from '../../components/alphabet/spell-dialog/SpellDialog.vue';
+import LettersBar from '../components/AlphabetLettersBar.vue';
+import MainSpace from '../components/AlphabetMainSpace.vue';
+import SpellBar from '../components/AlphabetSpellBar.vue';
+import ImagesSpace from '../components/AlphabetImagesSpace.vue';
+import SpellDialog from '../components/AlphabetSpellDialog.vue';
 
-import getAlphabet from '../../components/alphabet/models/alphabet';
+import getAlphabet from '../models/alphabet/alphabet';
 import {
     playAudio,
     getLettersAudioUri
-} from '../../assets/audio/player';
+} from '../assets/audio/player';
 
 export default {
-    name: 'alphabet',
+    name: 'Alphabet',
     components: {
         LettersBar,
         MainSpace,

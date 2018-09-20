@@ -36,7 +36,7 @@
  import {
      playAudio,
      getLettersAudioUri
- } from '../../../assets/audio/player';
+ } from '../assets/audio/player';
 
  export default {
      name: 'spell-dialog',
