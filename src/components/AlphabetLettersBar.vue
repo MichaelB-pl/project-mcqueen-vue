@@ -1,32 +1,34 @@
 <template>
-<div class="letters-bar">
-    <ul class="letters-list">
-        <li class="letter-item noselect" 
+<div class="alphabet__letters-bar">
+    <ul class="alphabet__letters-bar-list">
+        <AlphabetLettersBarListItem  
             v-for="(letter, index) in letters" 
             :key="index" 
-            @click="$emit('letterIndexChanged',index)"
-        >
-            {{letter}}
-        </li>
+            :letter="letter"
+            @click.native="$emit('letterIndexChanged', index)"/>
     </ul>
 </div>
 </template>
 
 <script>
+import AlphabetLettersBarListItem from './AlphabetLettersBarListItem.vue';
+
 export default {
-    name: 'letters-bar',
-    props: ['alphabet'],
-    data() {
-        const letters = this.alphabet.map(letter => letter.letter);
-        return {
-            letters
-        };
+    name: 'LettersBar',
+    components: {
+        AlphabetLettersBarListItem
+    },
+    props: {
+        letters: {
+            type: Array,
+            required: true
+        }
     }
 }
 </script>
 
 <style scoped>
- .letters-bar {
+ .alphabet__letters-bar {
      width: 100%;
      height: var(--bar-size);
      background-color: var(--color-primary);
@@ -35,7 +37,7 @@ export default {
      font-size: calc(var(--bar-size) * 0.6);
  }
 
- .letters-list {
+ .alphabet__letters-bar-list {
      width: var(--bar-size);
      height: 100vw;
      margin: calc(-50vw + var(--bar-size) / 2) 0 0 calc(50vw - var(--bar-size) / 2);
@@ -51,55 +53,40 @@ export default {
      transition: width var(--transition-duration);
  }
 
- .letter-item {
-     width: var(--bar-size);
-     height: var(--bar-size);
-     display: flex;
-     flex-flow: column nowrap;
-     justify-content: center;
-     align-items: center;
-     font-weight: bolder;
-     transform: rotate(90deg);
-     color: white;
-     cursor: pointer;
- }
+ 
 
- .letter-item:hover {
-     background-color: #0002;
- }
-
- .letters-list:hover::-webkit-scrollbar {
+ .alphabet__letters-bar-list:hover::-webkit-scrollbar {
      display: initial;
  }
 
- .letters-list::-webkit-scrollbar {
+ .alphabet__letters-bar-list::-webkit-scrollbar {
      width: calc(var(--bar-size) * 0.15);
      display: none;
  }
 
- .letters-list::-webkit-scrollbar-track {
+ .alphabet__letters-bar-list::-webkit-scrollbar-track {
      background: #0000;
  }
 
- .letters-list::-webkit-scrollbar-track:hover {
+ .alphabet__letters-bar-list::-webkit-scrollbar-track:hover {
      background: #0002;
  }
 
- .letters-list::-webkit-scrollbar-thumb {
+ .alphabet__letters-bar-list::-webkit-scrollbar-thumb {
      background: #fff3;
  }
 
- .letters-list::-webkit-scrollbar-thumb:hover {
+ .alphabet__letters-bar-list::-webkit-scrollbar-thumb:hover {
      background: #fffc;
  }
 
  @media screen and (orientation:landscape) and (max-height: 480px) {
-     .letters-bar {
+     .alphabet__letters-bar {
          height: calc(var(--bar-size) * 0.8);
          font-size: calc(var(--bar-size) * 0.48);
      }
 
-     .letters-list {
+     .alphabet__letters-bar-list {
          width: calc(var(--bar-size) * 0.8);
          margin: calc(-50vw + var(--bar-size) / 2 * 0.8) 0 0 calc(50vw - var(--bar-size) / 2 * 0.8);
      }

@@ -1,7 +1,7 @@
 <template>
 <div class="alphabet">
-    <LettersBar 
-        :alphabet="alphabet" 
+    <AlphabetLettersBar 
+        :letters="getLetters()" 
         @letterIndexChanged="onLetterIndexChanged($event)" 
     />
 
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import LettersBar from '../components/AlphabetLettersBar.vue';
+import AlphabetLettersBar from '../components/AlphabetLettersBar.vue';
 import MainSpace from '../components/AlphabetMainSpace.vue';
 import SpellBar from '../components/AlphabetSpellBar.vue';
 import ImagesSpace from '../components/AlphabetImagesSpace.vue';
@@ -54,7 +54,7 @@ import {
 export default {
     name: 'Alphabet',
     components: {
-        LettersBar,
+        AlphabetLettersBar,
         MainSpace,
         SpellBar,
         ImagesSpace,
@@ -70,26 +70,26 @@ export default {
         };
     },
     methods: {
+        getLetters(){
+            return this.alphabet.map(letter=>letter.letter);
+        },
+
         onLetterIndexChanged(index) {
-            console.log('onLetterIndexChanged');
             this.imageIndex = -1;
             this.letterIndex = index;
             this.saySelectedLetter();
         },
 
         onImageSelected(index) {
-            console.log('onImageSelected');
             this.imageIndex = index;
             this.saySelectedImage();
         },
 
         onBackgroundLetterClicked() {
-            console.log('onBackgroundLetterClicked');
             this.saySelectedLetter();
         },
 
         onSelectedImageClicked() {
-            console.log('onSelectedImageClicked');
             this.imageIndex = -1;
         },
 
@@ -109,7 +109,6 @@ export default {
         },
 
         onSpellClicked() {
-            console.log('onSpellClicked');
             this.isCurrentlySpelling = true;
         }
     }
