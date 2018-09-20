@@ -18,9 +18,8 @@
         @spellClicked="onSpellClicked()" 
     />
 
-    <ImagesSpace 
-        :alphabet="alphabet" 
-        :letterIndex="letterIndex" 
+    <AlphabetImagesSpace 
+        :alphabetItem="getSelectedAlphabetItem()" 
         @imageSelected="onImageSelected($event)" 
     />
 
@@ -40,7 +39,7 @@
 import AlphabetLettersBar from '../components/AlphabetLettersBar.vue';
 import AlphabetMainSpace from '../components/AlphabetMainSpace.vue';
 import AlphabetSpellBar from '../components/AlphabetSpellBar.vue';
-import ImagesSpace from '../components/AlphabetImagesSpace.vue';
+import AlphabetImagesSpace from '../components/AlphabetImagesSpace.vue';
 import SpellDialog from '../components/AlphabetSpellDialog.vue';
 
 import getAlphabet from '../models/alphabet/alphabet';
@@ -55,7 +54,7 @@ export default {
         AlphabetLettersBar,
         AlphabetMainSpace,
         AlphabetSpellBar,
-        ImagesSpace,
+        AlphabetImagesSpace,
         SpellDialog
     },
     data() {

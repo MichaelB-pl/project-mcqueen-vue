@@ -1,31 +1,39 @@
 <template>
-<div class="images-space">
-    <div class="image-item" v-for="(uri, index) in getImagesUri()" :key="index" @click="$emit('imageSelected', index)">
-        <img :src="uri"/>
-        </div>
-    </div>
+<div class="alphabet__images-space">
+    <AlphabetImagesSpaceItem 
+        v-for="(uri, index) in getImagesUri()" 
+        :key="index" 
+        :uri="uri"
+        @click.native="$emit('imageSelected', index)"
+    />
+</div>
 </template>
 
 <script>
- export default {
-     name: 'images-space',
-     props: ['alphabet', 'letterIndex'],
-     data() {
-         const uris = this.alphabet.map(letter => letter.uris);
-         return {
-             uris
-         };
-     },
-     methods: {
-         getImagesUri() {
-             return this.uris[this.letterIndex];
-         }
-     }
- }
+import AlphabetItem from '../models/alphabet/alphabet-item';
+import AlphabetImagesSpaceItem from './AlphabetImagesSpaceItem.vue';
+
+export default {
+    name: 'AlphabetImagesSpace',
+    components: {
+        AlphabetImagesSpaceItem
+    },
+    props: {
+        alphabetItem: {
+            type: AlphabetItem,
+            required: true
+        }
+    },
+    methods: {
+        getImagesUri() {
+            return this.alphabetItem.uris;
+        }
+    }
+}
 </script>
 
 <style scoped>
-.images-space {
+.alphabet__images-space {
     width: 100%;
     height: calc(var(--alphabeth-dp) * 3);
     background-color: var(--color-primary-light);
@@ -37,32 +45,13 @@
     transition: height var(--transition-duration);
 }
 
-.image-item {
-    width: 33%;
-    height: 50%;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-}
-
-.image-item>img {
-    max-width: 90%;
-    max-height: 90%;
-}
-
 @media screen and (orientation:landscape) {
-    .images-space {
+    .alphabet__images-space {
         height: calc(var(--alphabeth-dp) * 2);
     }
 
-    .image-item {
-        width: 20%;
-        height: 100%;
-    }
-
     @media(max-height: 480px) {
-        .images-space {
+        .alphabet__images-space {
             height: calc(var(--alphabeth-dp) * 2 + var(--bar-size) * 0.5);
         }
     }
