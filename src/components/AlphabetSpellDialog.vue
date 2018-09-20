@@ -1,27 +1,27 @@
 <template>
 <div class="spell-dialog">
     <input class="unnecessary-components-checkbox" type="checkbox"
-            v-bind:checked="areUnnecessaryComponentsVisible"/>
+            :checked="areUnnecessaryComponentsVisible"/>
     <input class="pop-image-checkbox" type="checkbox"
-            v-bind:checked="isCurrentlyPopingImage"/>
+            :checked="isCurrentlyPopingImage"/>
 
     <div class="letters-bar" />
 
     <div class="main-space">
-        <img v-bind:src="getSelectedImageUri()"/>
+        <img :src="getSelectedImageUri()"/>
         </div>
 
         <div class="spell-bar noselect">
             <input class="animate-letters-checkbox" type="checkbox"
-                v-bind:checked="isCurrentlyMovingNextLetter"/>
+                :checked="isCurrentlyMovingNextLetter"/>
 
             <div class="letters-wrapper">
-                <p v-for="(letter, index) in letters" :key="index" v-bind:class="{ 'invisible-letter': index > displayedNameLastLetterIndex }">
+                <p v-for="(letter, index) in letters" :key="index" :class="{ 'invisible-letter': index > displayedNameLastLetterIndex }">
                     {{ letter }}
                 </p>
             </div>
             <div class="letters-wrapper floating-wrapper">
-                <p v-for="(letter, index) in letters" :key="index" v-bind:class="{ 'unnecessary-letter': index != getNextLetterIndex(),  
+                <p v-for="(letter, index) in letters" :key="index" :class="{ 'unnecessary-letter': index != getNextLetterIndex(),  
                         'desired-letter': index == getNextLetterIndex()}">
                     {{ letter }}
                 </p>

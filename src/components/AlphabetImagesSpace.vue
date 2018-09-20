@@ -1,7 +1,7 @@
 <template>
 <div class="images-space">
-    <div class="image-item" v-for="(uri, index) in getImagesUri()" :key="index" v-on:click="$emit('imageSelected', index)">
-        <img v-bind:src="uri"/>
+    <div class="image-item" v-for="(uri, index) in getImagesUri()" :key="index" @click="$emit('imageSelected', index)">
+        <img :src="uri"/>
         </div>
     </div>
 </template>

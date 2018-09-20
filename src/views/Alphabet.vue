@@ -2,28 +2,28 @@
 <div class="alphabet">
     <LettersBar 
         :alphabet="alphabet" 
-        @:letterIndexChanged="onLetterIndexChanged($event)" 
+        @letterIndexChanged="onLetterIndexChanged($event)" 
     />
 
     <MainSpace 
         :alphabet="alphabet" 
         :letterIndex="letterIndex" 
         :imageIndex="imageIndex" 
-        @:selectedImageClicked="onSelectedImageClicked()" 
-        @:backgroundLetterClicked="onBackgroundLetterClicked()" 
+        @selectedImageClicked="onSelectedImageClicked()" 
+        @backgroundLetterClicked="onBackgroundLetterClicked()" 
     />
 
     <SpellBar 
         :alphabet="alphabet" 
         :letterIndex="letterIndex" 
         :imageIndex="imageIndex" 
-        @:spellClicked="onSpellClicked()" 
+        @spellClicked="onSpellClicked()" 
     />
 
     <ImagesSpace 
         :alphabet="alphabet" 
         :letterIndex="letterIndex" 
-        @:imageSelected="onImageSelected($event)" 
+        @imageSelected="onImageSelected($event)" 
     />
 
     <transition name="dialog-in">
@@ -32,7 +32,7 @@
             :alphabet="alphabet" 
             :letterIndex="letterIndex" 
             :imageIndex="imageIndex" 
-            @:spellingFinished="isCurrentlySpelling = false" 
+            @spellingFinished="isCurrentlySpelling = false" 
         />
     </transition>
 </div>
@@ -71,21 +71,25 @@ export default {
     },
     methods: {
         onLetterIndexChanged(index) {
+            console.log('onLetterIndexChanged');
             this.imageIndex = -1;
             this.letterIndex = index;
             this.saySelectedLetter();
         },
 
         onImageSelected(index) {
+            console.log('onImageSelected');
             this.imageIndex = index;
             this.saySelectedImage();
         },
 
         onBackgroundLetterClicked() {
+            console.log('onBackgroundLetterClicked');
             this.saySelectedLetter();
         },
 
         onSelectedImageClicked() {
+            console.log('onSelectedImageClicked');
             this.imageIndex = -1;
         },
 
@@ -105,6 +109,7 @@ export default {
         },
 
         onSpellClicked() {
+            console.log('onSpellClicked');
             this.isCurrentlySpelling = true;
         }
     }

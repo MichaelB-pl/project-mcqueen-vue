@@ -1,6 +1,6 @@
 <template>
 <div class="spell-bar noselect">
-    <p v-if="imageIndex > -1" v-on:click="$emit('spellClicked')">
+    <p v-if="imageIndex > -1" @click="$emit('spellClicked')">
         {{ getImageSpell() }}
     </p>
 </div>
