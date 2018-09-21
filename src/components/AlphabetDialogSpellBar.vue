@@ -1,5 +1,5 @@
 <template>
-<div class="alphabet__dialog-spell-bar noselect">
+<div class="app-bar alphabet__spell-bar noselect">
     <transition-group name="pop-letter" tag="div">
         <AlphabetDialogSpellBarLetter v-for="(letter, index) in letters" :key="index" :letter="letter" />
     </transition-group>
@@ -24,10 +24,7 @@ export default {
 </script>
 
 <style scoped>
-.alphabet__dialog-spell-bar {
-    width: 100%;
-    height: var(--bar-size);
-    background-color: var(--color-primary);
+/* .alphabet__dialog-spell-bar {
     box-shadow: 0 0 4px 0 black;
     display: flex;
     flex-flow: row nowrap;
@@ -37,24 +34,16 @@ export default {
     color: white;
     font-weight: bold;
     z-index: 204;
-    /* transition: height var(--transition-duration), font-size var(--transition-duration); */
-}
+    transition: height var(--transition-duration), font-size var(--transition-duration);
+} */
 
-.alphabet__dialog-spell-bar>div {
-    width: 100%;
+.alphabet__spell-bar>div {
+    /* width: 100%; */
     height: 100%;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
-}
-
-@media screen and (orientation:landscape) and(max-height: 480px) {
-
-    .alphabet__dialog-spell-bar {
-        height: calc(var(--bar-size) * 0.5);
-        font-size: calc(var(--bar-size) * 0.35);
-    }
 }
 
 .pop-letter-enter-active {
@@ -70,22 +59,25 @@ export default {
     0% {
         margin-top: -50vh;
         transform: scale(0);
+        transform: skewX(-100px);
     }
 
     12.5% {
         transform: scale(2);
     }
 
-    25%{
+    25% {
         transform: scale(1);
     }
 
     50% {
         margin-top: -50vh;
+        transform: skewX(-100px);
     }
 
     100% {
         margin-top: 0;
+        transform: skewX(0);
     }
 }
 </style>

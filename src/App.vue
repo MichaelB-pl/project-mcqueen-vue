@@ -29,6 +29,7 @@
      width: 100vw;
      height: 100vh;
      background-color: var(--color-primary-extra-light);
+     color: white;
      overflow: hidden;
      font-family: cursive;
  }
@@ -40,5 +41,11 @@
      -moz-user-select: none;
      -ms-user-select: none;
      user-select: none;
+ }
+
+ .app-bar{
+     width: 100%;
+    height: var(--bar-size);
+    background-color: var(--color-primary);
  }
 </style>

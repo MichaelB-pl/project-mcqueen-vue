@@ -114,7 +114,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 :root {
     --alphabeth-dp: calc((100vh - var(--bar-size) * 2) / 8);
 }
@@ -126,5 +126,34 @@ export default {
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: stretch;
+}
+
+.alphabet__letters-bar{
+    box-shadow: 0 0 16px 0 black;
+    display: block;
+    font-size: calc(var(--bar-size) * 0.6);
+    transition: height var(--transition-duration), font-size var(--transition-duration);
+}
+
+.alphabet__spell-bar{
+    box-shadow: 0 0 4px 0 black;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(var(--bar-size) * 0.5);
+    font-weight: bold;
+    transition: height var(--transition-duration), font-size var(--transition-duration);
+}
+
+@media screen and (orientation:landscape) and (max-height: 480px) {
+    .alphabet__letters-bar {
+        height: calc(var(--bar-size) * 0.8);
+        font-size: calc(var(--bar-size) * 0.48);
+    }
+    .alphabet__spell-bar {
+        height: calc(var(--bar-size) * 0.5);
+        font-size: calc(var(--bar-size) * 0.35);
+    }
 }
 </style>

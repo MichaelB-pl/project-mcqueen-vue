@@ -1,5 +1,5 @@
 <template>
-<div class="alphabet__spell-bar noselect">
+<div class="app-bar alphabet__spell-bar noselect">
     <p v-if="imageIndex > -1" 
         @click="$emit('spellClicked')"
     >
@@ -32,10 +32,7 @@ export default {
 </script>
 
 <style scoped>
-.alphabet__spell-bar {
-    width: 100%;
-    height: var(--bar-size);
-    background-color: var(--color-primary);
+/* .alphabet__spell-bar {
     z-index: 60;
     box-shadow: 0 0 4px 0 black;
     display: flex;
@@ -46,12 +43,5 @@ export default {
     color: white;
     font-weight: bold;
     transition: height var(--transition-duration), font-size var(--transition-duration);
-}
-
-@media screen and (orientation:landscape) and (max-height: 480px) {
-    .alphabet__spell-bar {
-        height: calc(var(--bar-size) * 0.5);
-        font-size: calc(var(--bar-size) * 0.35);
-    }
-}
+} */
 </style>

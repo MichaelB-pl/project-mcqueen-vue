@@ -12,9 +12,9 @@
 
         <AlphabetDialogSpellBar :letters="getCurrentlyDisplayedLetters()"/>
 
-        <!-- <transition name="unnecessary-component">
+        <transition name="unnecessary-component">
             <AlphabetDialogImagesSpace v-if="areUnnecessaryComponentsVisible" />
-        </transition> -->
+        </transition>
     </div>
 </transition>
 </template>

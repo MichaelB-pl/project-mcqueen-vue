@@ -28,8 +28,9 @@ export default {
 <style scoped>
 .alphabet__dialog-main-space {
     width: 100%;
-    /* height: calc(var(--alphabeth-dp) * 5); */
-    height: 100%;
+    height: calc(var(--alphabeth-dp) * 5);
+    /* height: 100%; */
+    /* padding-top: 70%; */
     background-color: rebeccapurple;
     z-index: 201;
     transition: height var(--transition-duration);
@@ -46,13 +47,13 @@ export default {
 
 @media screen and (orientation:landscape) {
     .alphabet__dialog-main-space {
-        /* height: calc(var(--alphabeth-dp) * 6); */
+        height: calc(var(--alphabeth-dp) * 6);
     }
 
     @media(max-height: 480px) {
 
         .alphabet__dialog-main-space {
-            /* height: calc(var(--alphabeth-dp) * 6 + var(--bar-size) * 0.2); */
+            height: calc(var(--alphabeth-dp) * 6 + var(--bar-size) * 0.2);
         }
     }
 }

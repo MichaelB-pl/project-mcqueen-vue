@@ -12,6 +12,8 @@ export default {
 .images-space {
     width: 100%;
     height: calc(var(--alphabeth-dp) * 3);
+    /* height: 30%; */
+    /* padding-top: 30%; */
     background-color: var(--color-primary-light);
     display: flex;
     flex-flow: row wrap;

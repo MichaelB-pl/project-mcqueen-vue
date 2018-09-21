@@ -1,5 +1,5 @@
 <template>
-<div class="alphabet__letters-bar">
+<div class="app-bar alphabet__letters-bar">
     <ul class="alphabet__letters-bar-list">
         <AlphabetLettersBarListItem  
             v-for="(letter, index) in letters" 
@@ -28,15 +28,6 @@ export default {
 </script>
 
 <style scoped>
-.alphabet__letters-bar {
-    width: 100%;
-    height: var(--bar-size);
-    background-color: var(--color-primary);
-    box-shadow: 0 0 16px 0 black;
-    display: block;
-    font-size: calc(var(--bar-size) * 0.6);
-}
-
 .alphabet__letters-bar-list {
     width: var(--bar-size);
     height: 100vw;
@@ -79,11 +70,6 @@ export default {
 }
 
 @media screen and (orientation:landscape) and (max-height: 480px) {
-    .alphabet__letters-bar {
-        height: calc(var(--bar-size) * 0.8);
-        font-size: calc(var(--bar-size) * 0.48);
-    }
-
     .alphabet__letters-bar-list {
         width: calc(var(--bar-size) * 0.8);
         margin: calc(-50vw + var(--bar-size) / 2 * 0.8) 0 0 calc(50vw - var(--bar-size) / 2 * 0.8);
