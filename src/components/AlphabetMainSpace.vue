@@ -46,18 +46,6 @@ export default {
 </script>
 
 <style scoped>
- .alphabet__main-space {
-     width: 100%;
-     height: calc(var(--alphabeth-dp) * 5);
-     position: relative;
-     z-index: 1;
-     display: flex;
-     flex-flow: column nowrap;
-     justify-content: center;
-     align-items: center;
-     transition: height var(--transition-duration);
- }
-
  .alphabet__main-space-background-letter {
      width: auto;
      height: auto;
@@ -69,23 +57,5 @@ export default {
      flex-flow: column nowrap;
      justify-content: center;
      align-items: center;
- }
-
- .alphabet__main-space>img {
-     max-width: 90%;
-     max-height: 90%;
-     z-index: 3;
- }
-
- @media screen and (orientation:landscape) {
-     .alphabet__main-space {
-         height: calc(var(--alphabeth-dp) * 6);
-     }
-
-     @media(max-height: 480px) {
-         .alphabet__main-space {
-             height: calc(var(--alphabeth-dp) * 6 + var(--bar-size) * 0.2);
-         }
-     }
  }
 </style>

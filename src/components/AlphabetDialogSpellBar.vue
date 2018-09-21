@@ -24,19 +24,6 @@ export default {
 </script>
 
 <style scoped>
-/* .alphabet__dialog-spell-bar {
-    box-shadow: 0 0 4px 0 black;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    font-size: calc(var(--bar-size) * 0.5);
-    color: white;
-    font-weight: bold;
-    z-index: 204;
-    transition: height var(--transition-duration), font-size var(--transition-duration);
-} */
-
 .alphabet__spell-bar>div {
     /* width: 100%; */
     height: 100%;
@@ -59,7 +46,6 @@ export default {
     0% {
         margin-top: -50vh;
         transform: scale(0);
-        transform: skewX(-100px);
     }
 
     12.5% {
@@ -72,12 +58,10 @@ export default {
 
     50% {
         margin-top: -50vh;
-        transform: skewX(-100px);
     }
 
     100% {
         margin-top: 0;
-        transform: skewX(0);
     }
 }
 </style>
