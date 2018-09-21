@@ -25,7 +25,6 @@ export default {
 
 <style scoped>
 .alphabet__spell-bar>div {
-    /* width: 100%; */
     height: 100%;
     display: flex;
     flex-flow: row nowrap;
@@ -46,22 +45,27 @@ export default {
     0% {
         margin-top: -50vh;
         transform: scale(0);
+        color: gray;
     }
 
     12.5% {
-        transform: scale(2);
+        transform: scale(10);
     }
 
     25% {
-        transform: scale(1);
+        transform: scale(5);
     }
 
     50% {
         margin-top: -50vh;
+        color: gray;
+        transform: scale(5);
     }
 
     100% {
         margin-top: 0;
+        color: white;
+        transform: scale(1);
     }
 }
 </style>

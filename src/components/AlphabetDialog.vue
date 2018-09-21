@@ -6,6 +6,7 @@
         </transition>
 
         <AlphabetDialogMainSpace 
+            :areUnnecessaryComponentsVisible="areUnnecessaryComponentsVisible"
             :isImageVisible="isImageVisible"
             :imageUri="getImageUri()" 
         />
