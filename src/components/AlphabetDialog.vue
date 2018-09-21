@@ -4,7 +4,10 @@
         <transition name="unnecessary-component">
             <AlphabetDialogLettersBar v-if="areUnnecessaryComponentsVisible" />
         </transition>
-        <!-- <AlphabetDialogMainSpace /> -->
+        <AlphabetDialogMainSpace 
+            :isImageVisible="isImageVisible"
+            :imageUri="getImageUri()" 
+        />
         <!-- <AlphabetDialogSpellBar :letters="getCurrentlyDisplayedLetters()"/> -->
 
         <!-- <transition name="unnecessary-component">
@@ -48,6 +51,7 @@ export default {
         return {
             lastLetterIndex: -1,
             areUnnecessaryComponentsVisible: true,
+            isImageVisible: false,
             isViewDestroyed: false
         };
     },
@@ -114,6 +118,7 @@ export default {
         },
 
         async showImage() {
+            this.isImageVisible = true;
             await this.sleep(1000);
         },
 

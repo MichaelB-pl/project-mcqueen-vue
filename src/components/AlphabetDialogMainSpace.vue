@@ -1,19 +1,36 @@
 <template>
-<div class="main-space">
-    <img :src="getSelectedImageUri()"/>
-    </div>
+<div class="alphabet__dialog-main-space">
+    <transition name="pop">
+        <img
+        v-if="isImageVisible"
+        :src="imageUri"
+        />
+    </transition>
+</div>
 </template>
 
 <script>
 export default {
-    name: 'AlphabetDialogMainSpace'
+    name: 'AlphabetDialogMainSpace',
+    props: {
+        isImageVisible: {
+            type: Boolean,
+            required: true
+        },
+        imageUri: {
+            type: String,
+            required: true
+        }
+    }
 }
 </script>
 
 <style scoped>
-.main-space {
+.alphabet__dialog-main-space {
     width: 100%;
-    height: calc(var(--alphabeth-dp) * 5);
+    /* height: calc(var(--alphabeth-dp) * 5); */
+    height: 100%;
+    background-color: rebeccapurple;
     z-index: 201;
     transition: height var(--transition-duration);
     display: flex;
@@ -22,21 +39,29 @@ export default {
     align-items: center;
 }
 
-.main-space>img {
-    max-width: 0%;
-    max-height: 0%;
+.alphabet__dialog-main-space>img {
+    max-width: 90%;
+    max-height: 90%;
 }
 
 @media screen and (orientation:landscape) {
-    .main-space {
-        height: calc(var(--alphabeth-dp) * 6);
+    .alphabet__dialog-main-space {
+        /* height: calc(var(--alphabeth-dp) * 6); */
     }
 
     @media(max-height: 480px) {
 
-        .main-space {
-            height: calc(var(--alphabeth-dp) * 6 + var(--bar-size) * 0.2);
+        .alphabet__dialog-main-space {
+            /* height: calc(var(--alphabeth-dp) * 6 + var(--bar-size) * 0.2); */
         }
     }
+}
+
+.pop-enter-active {
+    transition: transform var(--transition-duration);
+}
+
+.pop-enter {
+    transform: scale(0);
 }
 </style>
