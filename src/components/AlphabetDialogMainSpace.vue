@@ -1,6 +1,6 @@
 <template>
 <div class="alphabet__dialog-main-space">
-    <transition name="pop">
+    <transition name="pop-image">
         <img
         v-if="isImageVisible"
         :src="imageUri"
@@ -57,11 +57,11 @@ export default {
     }
 }
 
-.pop-enter-active {
+.pop-image-enter-active {
     transition: transform var(--transition-duration);
 }
 
-.pop-enter {
+.pop-image-enter {
     transform: scale(0);
 }
 </style>
