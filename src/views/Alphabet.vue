@@ -24,7 +24,7 @@
     />
 
     <transition name="dialog-in">
-        <SpellDialog 
+        <AlphabetDialog 
             v-if="isCurrentlySpelling" 
             :alphabet="alphabet" 
             :letterIndex="letterIndex" 
@@ -40,7 +40,7 @@ import AlphabetLettersBar from '../components/AlphabetLettersBar.vue';
 import AlphabetMainSpace from '../components/AlphabetMainSpace.vue';
 import AlphabetSpellBar from '../components/AlphabetSpellBar.vue';
 import AlphabetImagesSpace from '../components/AlphabetImagesSpace.vue';
-import SpellDialog from '../components/AlphabetSpellDialog.vue';
+import AlphabetDialog from '../components/AlphabetDialog.vue';
 
 import getAlphabet from '../models/alphabet/alphabet';
 import {
@@ -55,7 +55,7 @@ export default {
         AlphabetMainSpace,
         AlphabetSpellBar,
         AlphabetImagesSpace,
-        SpellDialog
+        AlphabetDialog
     },
     data() {
         const alphabet = getAlphabet();
