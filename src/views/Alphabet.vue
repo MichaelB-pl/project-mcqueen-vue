@@ -23,15 +23,13 @@
         @imageSelected="onImageSelected($event)" 
     />
 
-    <transition name="dialog-in">
-        <AlphabetDialog 
+    <AlphabetDialog 
             v-if="isCurrentlySpelling" 
-            :alphabet="alphabet" 
-            :letterIndex="letterIndex" 
-            :imageIndex="imageIndex" 
+            :alphabetItem="getSelectedAlphabetItem()" 
+            :imageIndex="imageIndex"  
             @spellingFinished="isCurrentlySpelling = false" 
-        />
-    </transition>
+    />
+    
 </div>
 </template>
 
@@ -128,23 +126,5 @@ export default {
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: stretch;
-}
-
-.dialog-in-enter-active {
-    animation: dialog-fade-in var(--transition-duration-short);
-}
-
-.dialog-in-leave-active {
-    animation: dialog-fade-in var(--transition-duration) reverse;
-}
-
-@keyframes dialog-fade-in {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 100%;
-    }
 }
 </style>

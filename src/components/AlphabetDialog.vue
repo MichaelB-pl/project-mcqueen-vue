@@ -1,14 +1,12 @@
 <template>
-<div class="spell-dialog">
-    <input class="unnecessary-components-checkbox" type="checkbox"
-            :checked="areUnnecessaryComponentsVisible"/>
-    <input class="pop-image-checkbox" type="checkbox"
-            :checked="isCurrentlyPopingImage"/>
-    <AlphabetDialogLettersBar />
-    <AlphabetDialogMainSpace />
-    <AlphabetDialogSpellBar />
-    <AlphabetDialogImagesSpace />
-</div>
+<transition name="dialog-fading">
+    <div class="alphabet__dialog">
+        <AlphabetDialogLettersBar />
+        <AlphabetDialogMainSpace />
+        <AlphabetDialogSpellBar />
+        <AlphabetDialogImagesSpace />
+    </div>
+</transition>
 </template>
 
 <script>
@@ -16,6 +14,7 @@ import {
     playAudio,
     getLettersAudioUri
 } from '../assets/audio/player';
+import AlphabetItem from '../models/alphabet/alphabet-item';
 
 import AlphabetDialogLettersBar from './AlphabetDialogLettersBar.vue';
 import AlphabetDialogMainSpace from './AlphabetDialogMainSpace.vue';
@@ -30,103 +29,79 @@ export default {
         AlphabetDialogSpellBar,
         AlphabetDialogImagesSpace
     },
-    props: ['alphabet', 'letterIndex', 'imageIndex'],
+    props: {
+        alphabetItem: {
+            type: AlphabetItem,
+            required: true
+        },
+        imageIndex: {
+            type: Number,
+            required: true
+        }
+    },
     data() {
-        const selectedLetterItem = this.alphabet[this.letterIndex];
-        const letter = selectedLetterItem.letter;
-        const imageName = selectedLetterItem.names[this.imageIndex];
-        const imageUri = selectedLetterItem.uris[this.imageIndex];
-        const letters = imageName.split('');
-
         return {
-            letters,
-            letter,
-            imageName,
-            imageUri,
-            displayedNameLastLetterIndex: -2,
+            lastLetterIndex: -1,
             areUnnecessaryComponentsVisible: true,
-            isCurrentlyMovingNextLetter: true,
-            isCurrentlyPopingImage: false,
             isViewDestroyed: false
         };
     },
     mounted() {
-        this.startSpelling().then(resolve => {
-            if (resolve)
-                this.$emit('spellingFinished');
-        });
+        this.startSpelling()
+        //         this.$emit('spellingFinished');
     },
     beforeDestroy() {
         this.isViewDestroyed = true;
     },
     methods: {
-        getNextLetterIndex() {
-            return this.displayedNameLastLetterIndex + 1;
+        getLetter() {
+            return this.alphabetItem.letter;
         },
 
-        getSelectedImageUri() {
-            const letter = this.alphabet[this.letterIndex];
-            const uri = letter.uris[this.imageIndex];
-            return uri;
+        getImageName() {
+            return this.alphabetItem.names[this.imageIndex];
         },
 
-        startSpelling() {
-            return new Promise((resolve) => {
+        getImageUri() {
+            return this.alphabetItem.uris[this.imageIndex];
+        },
+
+        getImageNameLetters() {
+            return this.getImageName().split('');
+        },
+
+        getCurrentlyDisplayedLetters() {
+            return this.lastLetterIndex >= 0 ?
+                this.getImageNameLetters().slice(0, this.lastLetterIndex + 1) : [];
+        },
+
+        async startSpelling() {
+            await this.hideUnnecessaryComponents();
+            console.log('next');
+            await this.spellWord();
+            console.log(`spelled`);
+        },
+
+        async hideUnnecessaryComponents() {
+            this.areUnnecessaryComponentsVisible = false;
+            await this.sleep(300);
+        },
+
+        async sleep(timeout) {
+            return new Promise((resolve) =>
                 setTimeout(() => {
-                    this.areUnnecessaryComponentsVisible = false;
-                    setTimeout(() => {
-                        this.spellNextLetter(resolve);
-                    }, 300);
-                }, 300);
-            });
-        },
-
-        spellNextLetter(resolve) {
-            this.showAndSayNextLetter();
-
-            setTimeout(() => {
-                if (this.isViewDestroyed) {
                     resolve();
-                    return;
-                }
-
-                this.isCurrentlyMovingNextLetter = true;
-                setTimeout(() => {
-                    if (this.isViewDestroyed) {
-                        resolve();
-                    } else if (this.displayedNameLastLetterIndex < this.letters.length - 2) {
-                        this.spellNextLetter(resolve);
-                    } else {
-                        this.isCurrentlyMovingNextLetter = false;
-                        this.displayedNameLastLetterIndex++;
-                        this.popImage(resolve);
-                    }
-                }, 2300);
-            }, 1000);
+                }, timeout));
         },
 
-        showAndSayNextLetter() {
-            this.isCurrentlyMovingNextLetter = false;
-            this.displayedNameLastLetterIndex++;
-
-            const nextLetter = this.letters[this.getNextLetterIndex()];
-            const audioUri = getLettersAudioUri(nextLetter, nextLetter);
-            playAudio(audioUri);
+        async spellWord() {
+            const letters = this.getImageNameLetters();
+            for (let i = 0; i < letters.length; i++) {
+                this.lastLetterIndex = i;
+                console.log(`Letter: ${letters[i]}`);
+                await this.sleep(300);
+            }
         },
-
-        popImage(resolve) {
-            this.isCurrentlyPopingImage = true;
-
-            const audioUri = getLettersAudioUri(this.letter, this.imageName);
-            playAudio(audioUri);
-
-            setTimeout(() => {
-                this.areUnnecessaryComponentsVisible = true;
-                setTimeout(() => {
-                    resolve(true);
-                }, 300);
-            }, 1000);
-        }
     }
 }
 </script>
@@ -136,7 +111,7 @@ export default {
     --letter-animation-time: 2s;
 }
 
-.spell-dialog {
+.alphabet__dialog {
     width: 100vw;
     height: 100vh;
     background-color: var(--color-primary-extra-light);
@@ -152,72 +127,13 @@ export default {
     transition: height var(--transition-duration);
 }
 
-.invisible-letter {
-    color: transparent;
+.dialog-fading-enter-active,
+.dialog-fading-leave-active {
+    transition: opacity var(--transition-duration);
 }
 
-.unnecessary-components-checkbox {
-    display: none;
-    position: absolute;
-}
-
-.pop-image-checkbox {
-    display: none;
-    position: absolute;
-}
-
-.unnecessary-components-checkbox:not(:checked)~.letters-bar {
-    height: 0;
-}
-
-.unnecessary-components-checkbox:not(:checked)~.main-space {
-    height: calc(var(--alphabeth-dp) * 7 + var(--bar-size));
-}
-
-.unnecessary-components-checkbox:not(:checked)~.spell-bar {
-    height: calc(var(--alphabeth-dp) + var(--bar-size));
-    font-size: calc(var(--bar-size));
-}
-
-.unnecessary-components-checkbox:not(:checked)~.images-space {
-    height: 0;
-}
-
-@keyframes image-jump-in {
-    0% {
-        transform: scale(0);
-    }
-
-    50% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes letters-jump {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.5);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-.pop-image-checkbox:checked~.main-space>img {
-    max-width: 90%;
-    max-height: 90%;
-    animation: image-jump-in .5s ease;
-}
-
-.pop-image-checkbox:checked~.spell-bar>.letters-wrapper {
-    animation: letters-jump .5s ease;
+.dialog-fading-enter,
+.dialog-fading-leave-to {
+    opacity: 0;
 }
 </style>
