@@ -4,11 +4,13 @@
         <transition name="unnecessary-component">
             <AlphabetDialogLettersBar v-if="areUnnecessaryComponentsVisible" />
         </transition>
+
         <AlphabetDialogMainSpace 
             :isImageVisible="isImageVisible"
             :imageUri="getImageUri()" 
         />
-        <!-- <AlphabetDialogSpellBar :letters="getCurrentlyDisplayedLetters()"/> -->
+
+        <AlphabetDialogSpellBar :letters="getCurrentlyDisplayedLetters()"/>
 
         <!-- <transition name="unnecessary-component">
             <AlphabetDialogImagesSpace v-if="areUnnecessaryComponentsVisible" />
@@ -92,7 +94,7 @@ export default {
             console.log(`image`);
             await this.showUnnecessaryComponents();
             console.log(`showed`);
-            this.closePopup()
+            this.closePopup();
         },
 
         async hideUnnecessaryComponents() {
@@ -113,7 +115,7 @@ export default {
             for (let i = 0; i < letters.length; i++) {
                 this.lastLetterIndex = i;
                 console.log(`Letter: ${letters[i]}`);
-                await this.sleep(500);
+                await this.sleep(2000);
             }
         },
 
