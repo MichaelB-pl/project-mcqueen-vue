@@ -1,10 +1,15 @@
 <template>
 <transition name="dialog-fading">
     <div class="alphabet__dialog">
-        <AlphabetDialogLettersBar />
-        <AlphabetDialogMainSpace />
-        <AlphabetDialogSpellBar />
-        <AlphabetDialogImagesSpace />
+        <transition name="unnecessary-component">
+            <AlphabetDialogLettersBar v-if="areUnnecessaryComponentsVisible" />
+        </transition>
+        <!-- <AlphabetDialogMainSpace /> -->
+        <!-- <AlphabetDialogSpellBar :letters="getCurrentlyDisplayedLetters()"/> -->
+
+        <!-- <transition name="unnecessary-component">
+            <AlphabetDialogImagesSpace v-if="areUnnecessaryComponentsVisible" />
+        </transition> -->
     </div>
 </transition>
 </template>
@@ -48,7 +53,6 @@ export default {
     },
     mounted() {
         this.startSpelling()
-        //         this.$emit('spellingFinished');
     },
     beforeDestroy() {
         this.isViewDestroyed = true;
@@ -77,12 +81,18 @@ export default {
 
         async startSpelling() {
             await this.hideUnnecessaryComponents();
-            console.log('next');
+            console.log('hidden');
             await this.spellWord();
             console.log(`spelled`);
+            await this.showImage();
+            console.log(`image`);
+            await this.showUnnecessaryComponents();
+            console.log(`showed`);
+            this.closePopup()
         },
 
         async hideUnnecessaryComponents() {
+            await this.sleep(300);
             this.areUnnecessaryComponentsVisible = false;
             await this.sleep(300);
         },
@@ -99,9 +109,22 @@ export default {
             for (let i = 0; i < letters.length; i++) {
                 this.lastLetterIndex = i;
                 console.log(`Letter: ${letters[i]}`);
-                await this.sleep(300);
+                await this.sleep(500);
             }
         },
+
+        async showImage() {
+            await this.sleep(1000);
+        },
+
+        async showUnnecessaryComponents() {
+            this.areUnnecessaryComponentsVisible = true;
+            await this.sleep(300);
+        },
+
+        closePopup() {
+            this.$emit('spellingFinished');
+        }
     }
 }
 </script>
@@ -135,5 +158,15 @@ export default {
 .dialog-fading-enter,
 .dialog-fading-leave-to {
     opacity: 0;
+}
+
+.unnecessary-component-enter-active,
+.unnecessary-component-leave-active {
+    transition: height var(--transition-duration);
+}
+
+.unnecessary-component-enter,
+.unnecessary-component-leave-to {
+    height: 0;
 }
 </style>
