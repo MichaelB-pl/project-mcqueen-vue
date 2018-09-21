@@ -30,18 +30,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-/* .alphabet__spell-bar {
-    z-index: 60;
-    box-shadow: 0 0 4px 0 black;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    font-size: calc(var(--bar-size) * 0.5);
-    color: white;
-    font-weight: bold;
-    transition: height var(--transition-duration), font-size var(--transition-duration);
-} */
-</style>

@@ -133,6 +133,7 @@ export default {
     display: block;
     font-size: calc(var(--bar-size) * 0.6);
     transition: height var(--transition-duration), font-size var(--transition-duration);
+    z-index: 100;
 }
 
 .alphabet__main-space {
@@ -144,6 +145,7 @@ export default {
     justify-content: center;
     align-items: center;
     transition: height var(--transition-duration);
+    z-index: 1;
 }
 
 .alphabet__main-space>img {
@@ -160,6 +162,7 @@ export default {
     font-size: calc(var(--bar-size) * 0.5);
     font-weight: bold;
     transition: height var(--transition-duration), font-size var(--transition-duration);
+    z-index: 75;
 }
 
 .alphabet__images-space {
@@ -171,6 +174,7 @@ export default {
     justify-content: space-around;
     align-items: center;
     transition: height var(--transition-duration);
+    z-index: 50;
 }
 
 @media screen and (orientation:landscape) {

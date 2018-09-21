@@ -52,7 +52,6 @@ export default {
      color: #0003;
      position: absolute;
      font-size: 40vmin;
-     z-index: 2;
      display: flex;
      flex-flow: column nowrap;
      justify-content: center;
