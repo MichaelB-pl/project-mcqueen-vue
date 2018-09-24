@@ -1,8 +1,8 @@
 <template>
 <div class="app-bar alphabet__spell-bar noselect">
-    <p v-if="imageIndex > -1" 
+    <p v-if="isSelectedAnyImage" 
         @click="$emit('spellClicked')"
-    >{{ getImageSpell() }}</p>
+    >{{ getImageSpell }}</p>
 </div>
 </template>
 
@@ -21,7 +21,11 @@ export default {
             required: true
         }
     },
-    methods: {
+    computed: {
+        isSelectedAnyImage() {
+            return this.imageIndex > -1;
+        },
+
         getImageSpell() {
             return this.alphabetItem.names[this.imageIndex];
         }

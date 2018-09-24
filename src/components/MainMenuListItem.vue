@@ -46,7 +46,7 @@ export default {
 }
 
 @media(max-width: 360px) {
-    .menu-item {
+    .main-menu__list-item {
         width: 100%;
         margin: var(--spacing) 0;
         border-radius: 0;

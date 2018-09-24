@@ -1,16 +1,14 @@
 <template>
 <div class="alphabet__main-space">
     <div 
-        v-if="imageIndex === -1" 
+        v-if="!isSelectedAnyImage" 
         class="alphabet__main-space-background-letter noselect" 
         @click="$emit('backgroundLetterClicked')"
-    >
-        {{ getDisplayedLetter() }}
-    </div>
+    >{{ getDisplayedLetter }}</div>
 
     <img 
-        v-if="imageIndex > -1" 
-        :src="getSelectedImageUri()"
+        v-if="isSelectedAnyImage" 
+        :src="getSelectedImageUri"
         @click="$emit('selectedImageClicked')"
     />
     </div>
@@ -31,7 +29,11 @@ export default {
             required: true
         }
     },
-    methods: {
+    computed: {
+        isSelectedAnyImage() {
+            return this.imageIndex > -1;
+        },
+
         getDisplayedLetter() {
             const letter = this.alphabetItem.letter;
             return `${letter.toUpperCase()}${letter.toLowerCase()}`;

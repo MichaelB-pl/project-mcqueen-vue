@@ -15,10 +15,13 @@
     --color-primary-light: #bef67a;
     --color-primary-extra-light: #f2ffab;
     --color-accent: #790e8b;
-    --transition-duration: 0.3s;
-    --transition-duration-short: 0.2s;
-    --transition-duration-long: 0.5s;
+    --transition-duration: .3s;
+    --transition-duration-long: .5s;
     --bar-size: 56px;
+    --scrollbar-track-background: #0000;
+    --scrollbar-track-background-hover: #0002;
+    --scrollbar-thumb-background: #fff3;
+    --scrollbar-thumb-background-hover: #fffc;
 }
 
 body {

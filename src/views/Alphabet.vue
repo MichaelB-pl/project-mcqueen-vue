@@ -1,33 +1,33 @@
 <template>
 <div class="alphabet">
     <AlphabetLettersBar 
-        :letters="getLetters()" 
+        :letters="getLetters" 
         @letterIndexChanged="onLetterIndexChanged($event)" 
     />
 
     <AlphabetMainSpace 
-        :alphabetItem="getSelectedAlphabetItem()" 
+        :alphabetItem="getSelectedAlphabetItem" 
         :imageIndex="imageIndex" 
         @selectedImageClicked="onSelectedImageClicked()" 
         @backgroundLetterClicked="onBackgroundLetterClicked()" 
     />
 
     <AlphabetSpellBar 
-        :alphabetItem="getSelectedAlphabetItem()" 
+        :alphabetItem="getSelectedAlphabetItem" 
         :imageIndex="imageIndex"  
         @spellClicked="onSpellClicked()" 
     />
 
     <AlphabetImagesSpace 
-        :alphabetItem="getSelectedAlphabetItem()" 
+        :uris="getSelectedAlphabetItemUris" 
         @imageSelected="onImageSelected($event)" 
     />
 
     <AlphabetDialog 
             v-if="isCurrentlySpelling" 
-            :alphabetItem="getSelectedAlphabetItem()" 
+            :alphabetItem="getSelectedAlphabetItem" 
             :imageIndex="imageIndex"  
-            @spellingFinished="isCurrentlySpelling = false" 
+            @spellingFinished="onSpellingFinished()" 
     />
     
 </div>
@@ -64,7 +64,7 @@ export default {
             isCurrentlySpelling: false
         };
     },
-    methods: {
+    computed: {
         getLetters() {
             return this.alphabet.map(letter => letter.letter);
         },
@@ -73,6 +73,11 @@ export default {
             return this.alphabet[this.letterIndex];
         },
 
+        getSelectedAlphabetItemUris() {
+            return this.getSelectedAlphabetItem.uris;
+        }
+    },
+    methods: {
         onLetterIndexChanged(index) {
             this.imageIndex = -1;
             this.letterIndex = index;
@@ -90,6 +95,10 @@ export default {
 
         onSelectedImageClicked() {
             this.imageIndex = -1;
+        },
+
+        onSpellingFinished(){
+            this.isCurrentlySpelling = false;
         },
 
         saySelectedLetter() {
@@ -193,10 +202,8 @@ export default {
             font-size: calc(var(--bar-size) * 0.48);
         }
 
-        @media(max-height: 480px) {
-            .alphabet__main-space {
-                height: calc(var(--alphabeth-dp) * 6 + var(--bar-size) * 0.2);
-            }
+        .alphabet__main-space {
+            height: calc(var(--alphabeth-dp) * 6 + var(--bar-size) * 0.2);
         }
 
         .alphabet__spell-bar {

@@ -1,7 +1,11 @@
 <template>
 <div class="app-bar alphabet__spell-bar noselect">
     <transition-group name="pop-letter" tag="div">
-        <AlphabetDialogSpellBarLetter v-for="(letter, index) in letters" :key="index" :letter="letter" />
+        <AlphabetDialogSpellBarLetter 
+            v-for="(letter, index) in letters" 
+            :key="index" 
+            :letter="letter" 
+        />
     </transition-group>
 </div>
 </template>
@@ -24,6 +28,10 @@ export default {
 </script>
 
 <style scoped>
+:root {
+    --letter-pop-duration: 2s;
+}
+
 .alphabet__spell-bar>div {
     height: 100%;
     display: flex;
@@ -33,12 +41,12 @@ export default {
 }
 
 .pop-letter-enter-active {
-    animation: pop-letter-animation 2s;
+    animation: pop-letter-animation var(--letter-pop-duration);
 }
 
 .pop-letter-move {
-    transition: transform .3s;
-    transition-delay: 1s;
+    transition: transform var(--transition-duration);
+    transition-delay: calc(var(--letter-pop-duration) / 2);
 }
 
 @keyframes pop-letter-animation {

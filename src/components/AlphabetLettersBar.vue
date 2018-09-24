@@ -54,19 +54,19 @@ export default {
 }
 
 .alphabet__letters-bar-list::-webkit-scrollbar-track {
-    background: #0000;
+    background: var(--scrollbar-track-background);
 }
 
 .alphabet__letters-bar-list::-webkit-scrollbar-track:hover {
-    background: #0002;
+    background: var(--scrollbar-track-background-hover);
 }
 
 .alphabet__letters-bar-list::-webkit-scrollbar-thumb {
-    background: #fff3;
+    background: var(--scrollbar-thumb-background);
 }
 
 .alphabet__letters-bar-list::-webkit-scrollbar-thumb:hover {
-    background: #fffc;
+    background: var(--scrollbar-thumb-background-hover);
 }
 
 @media screen and (orientation:landscape) and (max-height: 480px) {

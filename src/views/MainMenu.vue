@@ -4,7 +4,6 @@
         <MainMenuListItem 
             v-for="(page, index) in pages" 
             :key="index"
-            class="menu-item" 
             :pagePath="page.path"
             :pageName="page.name.toUpperCase()"
         />

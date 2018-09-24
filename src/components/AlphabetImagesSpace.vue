@@ -1,7 +1,7 @@
 <template>
 <div class="alphabet__images-space">
     <AlphabetImagesSpaceItem 
-        v-for="(uri, index) in getImagesUri()" 
+        v-for="(uri, index) in uris" 
         :key="index" 
         :uri="uri"
         @click.native="$emit('imageSelected', index)"
@@ -19,14 +19,9 @@ export default {
         AlphabetImagesSpaceItem
     },
     props: {
-        alphabetItem: {
-            type: AlphabetItem,
+        uris: {
+            type: Array,
             required: true
-        }
-    },
-    methods: {
-        getImagesUri() {
-            return this.alphabetItem.uris;
         }
     }
 }

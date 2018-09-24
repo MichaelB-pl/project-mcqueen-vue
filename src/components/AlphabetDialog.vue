@@ -8,12 +8,12 @@
         <AlphabetDialogMainSpace 
             :areUnnecessaryComponentsVisible="areUnnecessaryComponentsVisible"
             :isImageVisible="isImageVisible"
-            :imageUri="getImageUri()" 
-            :letter="getLetter()"
-            :imageName="getImageName()"
+            :imageUri="getImageUri" 
+            :letter="getLetter"
+            :imageName="getImageName"
         />
 
-        <AlphabetDialogSpellBar :letters="getCurrentlyDisplayedLetters()"/>
+        <AlphabetDialogSpellBar :letters="getCurrentlyDisplayedLetters"/>
 
         <transition name="unnecessary-component">
             <AlphabetDialogImagesSpace v-if="areUnnecessaryComponentsVisible" />
@@ -56,13 +56,7 @@ export default {
             isViewDestroyed: false
         };
     },
-    mounted() {
-        this.startSpelling()
-    },
-    beforeDestroy() {
-        this.isViewDestroyed = true;
-    },
-    methods: {
+    computed: {
         getLetter() {
             return this.alphabetItem.letter;
         },
@@ -76,14 +70,21 @@ export default {
         },
 
         getImageNameLetters() {
-            return this.getImageName().split('');
+            return this.getImageName.split('');
         },
 
         getCurrentlyDisplayedLetters() {
             return this.lastLetterIndex >= 0 ?
-                this.getImageNameLetters().slice(0, this.lastLetterIndex + 1) : [];
-        },
-
+                this.getImageNameLetters.slice(0, this.lastLetterIndex + 1) : [];
+        }
+    },
+    mounted() {
+        this.startSpelling()
+    },
+    beforeDestroy() {
+        this.isViewDestroyed = true;
+    },
+    methods: {
         async startSpelling() {
             await this.hideUnnecessaryComponents();
             await this.spellWord();
@@ -106,7 +107,7 @@ export default {
         },
 
         async spellWord() {
-            const letters = this.getImageNameLetters();
+            const letters = this.getImageNameLetters;
             for (let i = 0; i < letters.length; i++) {
                 this.lastLetterIndex = i;
                 await this.sleep(2000);
@@ -131,10 +132,6 @@ export default {
 </script>
 
 <style scoped>
-:root {
-    --letter-animation-time: 2s;
-}
-
 .alphabet__dialog {
     width: 100vw;
     height: 100vh;
