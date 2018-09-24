@@ -11,6 +11,11 @@
 </template>
 
 <script>
+import {
+    playAudio,
+    getLettersAudioUri
+} from '../assets/audio/player';
+
 export default {
     name: 'AlphabetDialogMainSpace',
     props: {
@@ -25,6 +30,22 @@ export default {
         imageUri: {
             type: String,
             required: true
+        },
+        letter: {
+            type: String,
+            required: true
+        },
+        imageName: {
+            type: String,
+            required: true
+        }
+    },
+    watch: {
+        isImageVisible(val, oldVal) {
+            if (val && val != oldVal) {
+                const imageUri = getLettersAudioUri(this.letter, this.imageName);
+                playAudio(imageUri);
+            }
         }
     }
 }
@@ -42,10 +63,20 @@ export default {
 }
 
 .pop-image-enter-active {
-    transition: transform var(--transition-duration);
+    animation: pop-image-animation var(--transition-duration-long);
 }
 
-.pop-image-enter {
-    transform: scale(0);
+@keyframes pop-image-animation {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 </style>

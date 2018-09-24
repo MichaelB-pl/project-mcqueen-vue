@@ -9,6 +9,8 @@
             :areUnnecessaryComponentsVisible="areUnnecessaryComponentsVisible"
             :isImageVisible="isImageVisible"
             :imageUri="getImageUri()" 
+            :letter="getLetter()"
+            :imageName="getImageName()"
         />
 
         <AlphabetDialogSpellBar :letters="getCurrentlyDisplayedLetters()"/>
@@ -21,10 +23,6 @@
 </template>
 
 <script>
-import {
-    playAudio,
-    getLettersAudioUri
-} from '../assets/audio/player';
 import AlphabetItem from '../models/alphabet/alphabet-item';
 
 import AlphabetDialogLettersBar from './AlphabetDialogLettersBar.vue';
@@ -88,13 +86,9 @@ export default {
 
         async startSpelling() {
             await this.hideUnnecessaryComponents();
-            console.log('hidden');
             await this.spellWord();
-            console.log(`spelled`);
             await this.showImage();
-            console.log(`image`);
             await this.showUnnecessaryComponents();
-            console.log(`showed`);
             this.closePopup();
         },
 
@@ -115,7 +109,6 @@ export default {
             const letters = this.getImageNameLetters();
             for (let i = 0; i < letters.length; i++) {
                 this.lastLetterIndex = i;
-                console.log(`Letter: ${letters[i]}`);
                 await this.sleep(2000);
             }
         },
