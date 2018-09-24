@@ -1,8 +1,6 @@
 <template>
 <li class="main-menu__list-item">
-    <a :href="pagePath">
-        {{ pageName }}
-    </a>
+    <a :href="pagePath">{{ pageName }}</a>
 </li>
 </template>
 

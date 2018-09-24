@@ -2,9 +2,7 @@
 <div class="app-bar alphabet__spell-bar noselect">
     <p v-if="imageIndex > -1" 
         @click="$emit('spellClicked')"
-    >
-        {{ getImageSpell() }}
-    </p>
+    >{{ getImageSpell() }}</p>
 </div>
 </template>
 

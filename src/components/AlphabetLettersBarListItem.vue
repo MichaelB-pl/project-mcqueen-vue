@@ -1,7 +1,5 @@
 <template>
-<li class="alphabet__letters-bar-list-item noselect">
-    {{ letter }}
-</li>
+<li class="alphabet__letters-bar-list-item noselect">{{ letter }}</li>
 </template>
 
 <script>

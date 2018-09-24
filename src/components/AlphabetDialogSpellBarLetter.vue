@@ -1,7 +1,5 @@
 <template>
-<p class="alphabet__dialog-spell-bar-letter">
-    {{ letter }}
-</p>
+<p>{{ letter }}</p>
 </template>
 
 <script>
@@ -15,9 +13,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.alphabet__dialog-spell-bar-letter {
-    margin: 0 -0.4em 0 0;
-}
-</style>
