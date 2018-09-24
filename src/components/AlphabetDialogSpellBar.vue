@@ -43,7 +43,9 @@ export default {
 
 @keyframes pop-letter-animation {
     0% {
-        margin-top: -50vh;
+        position: relative;
+        top: -50vh;
+        left: -50%;
         transform: scale(0);
         color: gray;
     }
@@ -57,15 +59,18 @@ export default {
     }
 
     50% {
-        margin-top: -50vh;
+        top: -50vh;
+        left: -50%;
         color: gray;
         transform: scale(5);
     }
 
     100% {
-        margin-top: 0;
+        top: 0;
+        left: 0;
         color: white;
         transform: scale(1);
+        position: relative;
     }
 }
 </style>

@@ -163,6 +163,7 @@ export default {
     font-weight: bold;
     transition: height var(--transition-duration), font-size var(--transition-duration);
     z-index: 75;
+    position: relative;
 }
 
 .alphabet__images-space {
