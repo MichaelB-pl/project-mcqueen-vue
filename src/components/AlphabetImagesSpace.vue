@@ -4,13 +4,18 @@
         v-for="(uri, index) in uris" 
         :key="index" 
         :uri="uri"
-        @click.native="$emit('imageSelected', index)"
+        @click.native="onImageSelected(index)"
     />
 </div>
 </template>
 
 <script>
-import AlphabetItem from '../models/alphabet/alphabet-item';
+import { mapGetters } from 'vuex';
+import {
+    playAudio,
+    getLettersAudioUri
+} from '../assets/audio/player';
+
 import AlphabetImagesSpaceItem from './AlphabetImagesSpaceItem.vue';
 
 export default {
@@ -18,10 +23,21 @@ export default {
     components: {
         AlphabetImagesSpaceItem
     },
-    props: {
-        uris: {
-            type: Array,
-            required: true
+    computed: {
+        ...mapGetters({
+            uris: 'selectedAlphabetItemUris'
+        })
+    },
+    methods: {
+        onImageSelected(index) {
+            this.$store.commit('setAlphabetItemImageIndex', index);
+            this.saySelectedImage();
+        },
+        saySelectedImage(){
+            const letter = this.$store.getters.selectedAlphabetItem.letter;
+            const imageName = this.$store.getters.selectedImageName;
+            const uri = getLettersAudioUri(letter, imageName);
+            playAudio(uri);
         }
     }
 }

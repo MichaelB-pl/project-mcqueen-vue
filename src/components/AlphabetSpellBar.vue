@@ -1,33 +1,25 @@
 <template>
 <div class="app-bar alphabet__spell-bar noselect">
     <p v-if="isSelectedAnyImage" 
-        @click="$emit('spellClicked')"
-    >{{ getImageSpell }}</p>
+        @click="onSpellClicked()"
+    >{{ selectedImageName }}</p>
 </div>
 </template>
 
 <script>
-import AlphabetItem from '../models/alphabet/alphabet-item';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'AlphabetSpellBar',
-    props: {
-        alphabetItem: {
-            type: AlphabetItem,
-            required: true
-        },
-        imageIndex: {
-            type: Number,
-            required: true
-        }
-    },
     computed: {
-        isSelectedAnyImage() {
-            return this.imageIndex > -1;
-        },
-
-        getImageSpell() {
-            return this.alphabetItem.names[this.imageIndex];
+        ...mapGetters([
+            'isSelectedAnyImage',
+            'selectedImageName'
+        ])
+    },
+    methods: {
+        onSpellClicked() {
+            this.$store.commit('setSpellingState', true);
         }
     }
 }

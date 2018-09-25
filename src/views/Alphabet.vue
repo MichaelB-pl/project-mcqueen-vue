@@ -1,35 +1,14 @@
 <template>
 <div class="alphabet">
-    <AlphabetLettersBar 
-        :letters="getLetters" 
-        @letterIndexChanged="onLetterIndexChanged($event)" 
-    />
+    <AlphabetLettersBar />
 
-    <AlphabetMainSpace 
-        :alphabetItem="getSelectedAlphabetItem" 
-        :imageIndex="imageIndex" 
-        @selectedImageClicked="onSelectedImageClicked()" 
-        @backgroundLetterClicked="onBackgroundLetterClicked()" 
-    />
+    <AlphabetMainSpace />
 
-    <AlphabetSpellBar 
-        :alphabetItem="getSelectedAlphabetItem" 
-        :imageIndex="imageIndex"  
-        @spellClicked="onSpellClicked()" 
-    />
+    <AlphabetSpellBar />
 
-    <AlphabetImagesSpace 
-        :uris="getSelectedAlphabetItemUris" 
-        @imageSelected="onImageSelected($event)" 
-    />
+    <AlphabetImagesSpace />
 
-    <AlphabetDialog 
-            v-if="isCurrentlySpelling" 
-            :alphabetItem="getSelectedAlphabetItem" 
-            :imageIndex="imageIndex"  
-            @spellingFinished="onSpellingFinished()" 
-    />
-    
+    <AlphabetDialog v-if="isCurrentlySpelling" />    
 </div>
 </template>
 
@@ -40,7 +19,7 @@ import AlphabetSpellBar from '../components/AlphabetSpellBar.vue';
 import AlphabetImagesSpace from '../components/AlphabetImagesSpace.vue';
 import AlphabetDialog from '../components/AlphabetDialog.vue';
 
-import getAlphabet from '../models/alphabet/alphabet';
+import { mapGetters } from 'vuex';
 import {
     playAudio,
     getLettersAudioUri
@@ -55,70 +34,10 @@ export default {
         AlphabetImagesSpace,
         AlphabetDialog
     },
-    data() {
-        const alphabet = getAlphabet();
-        return {
-            alphabet,
-            letterIndex: 0,
-            imageIndex: -1,
-            isCurrentlySpelling: false
-        };
-    },
     computed: {
-        getLetters() {
-            return this.alphabet.map(letter => letter.letter);
-        },
-
-        getSelectedAlphabetItem() {
-            return this.alphabet[this.letterIndex];
-        },
-
-        getSelectedAlphabetItemUris() {
-            return this.getSelectedAlphabetItem.uris;
-        }
-    },
-    methods: {
-        onLetterIndexChanged(index) {
-            this.imageIndex = -1;
-            this.letterIndex = index;
-            this.saySelectedLetter();
-        },
-
-        onImageSelected(index) {
-            this.imageIndex = index;
-            this.saySelectedImage();
-        },
-
-        onBackgroundLetterClicked() {
-            this.saySelectedLetter();
-        },
-
-        onSelectedImageClicked() {
-            this.imageIndex = -1;
-        },
-
-        onSpellingFinished(){
-            this.isCurrentlySpelling = false;
-        },
-
-        saySelectedLetter() {
-            const letter = this.alphabet[this.letterIndex].letter;
-            const src = getLettersAudioUri(letter, letter);
-            playAudio(src);
-        },
-
-        saySelectedImage() {
-            const selectedLetterItem = this.alphabet[this.letterIndex];
-            const letter = selectedLetterItem.letter;
-            const names = selectedLetterItem.names;
-            const selectedImageName = names[this.imageIndex];
-            const src = getLettersAudioUri(letter, selectedImageName);
-            playAudio(src);
-        },
-
-        onSpellClicked() {
-            this.isCurrentlySpelling = true;
-        }
+        ...mapGetters([
+            'isCurrentlySpelling'
+        ])
     }
 }
 </script>

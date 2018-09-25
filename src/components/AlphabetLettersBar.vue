@@ -5,12 +5,18 @@
             v-for="(letter, index) in letters" 
             :key="index" 
             :letter="letter"
-            @click.native="$emit('letterIndexChanged', index)"/>
+            @click.native="onSelectAlphabetItem(index, letter)"/>
     </ul>
 </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import {
+    playAudio,
+    getLettersAudioUri
+} from '../assets/audio/player';
+
 import AlphabetLettersBarListItem from './AlphabetLettersBarListItem.vue';
 
 export default {
@@ -18,10 +24,17 @@ export default {
     components: {
         AlphabetLettersBarListItem
     },
-    props: {
-        letters: {
-            type: Array,
-            required: true
+    computed: {
+        ...mapGetters(['letters'])
+    },
+    methods:{
+        onSelectAlphabetItem(index, letter){
+            this.$store.commit('setAlphabetItemIndex', index);
+            this.saySelectedLetter(letter);
+        },
+        saySelectedLetter(letter){
+            const src = getLettersAudioUri(letter, letter);
+            playAudio(src);
         }
     }
 }

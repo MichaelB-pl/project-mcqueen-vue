@@ -8,12 +8,9 @@
         <AlphabetDialogMainSpace 
             :areUnnecessaryComponentsVisible="areUnnecessaryComponentsVisible"
             :isImageVisible="isImageVisible"
-            :imageUri="getImageUri" 
-            :letter="getLetter"
-            :imageName="getImageName"
         />
 
-        <AlphabetDialogSpellBar :letters="getCurrentlyDisplayedLetters"/>
+        <AlphabetDialogSpellBar :letters="currentlyDisplayedLetters"/>
 
         <transition name="unnecessary-component">
             <AlphabetDialogImagesSpace v-if="areUnnecessaryComponentsVisible" />
@@ -23,8 +20,6 @@
 </template>
 
 <script>
-import AlphabetItem from '../models/alphabet/alphabet-item';
-
 import AlphabetDialogLettersBar from './AlphabetDialogLettersBar.vue';
 import AlphabetDialogMainSpace from './AlphabetDialogMainSpace.vue';
 import AlphabetDialogSpellBar from './AlphabetDialogSpellBar.vue';
@@ -38,51 +33,25 @@ export default {
         AlphabetDialogSpellBar,
         AlphabetDialogImagesSpace
     },
-    props: {
-        alphabetItem: {
-            type: AlphabetItem,
-            required: true
-        },
-        imageIndex: {
-            type: Number,
-            required: true
-        }
-    },
     data() {
         return {
             lastLetterIndex: -1,
             areUnnecessaryComponentsVisible: true,
-            isImageVisible: false,
-            isViewDestroyed: false
+            isImageVisible: false
         };
     },
     computed: {
-        getLetter() {
-            return this.alphabetItem.letter;
+        imageNameLetters() {
+            return this.$store.getters.selectedImageName.split('');
         },
 
-        getImageName() {
-            return this.alphabetItem.names[this.imageIndex];
-        },
-
-        getImageUri() {
-            return this.alphabetItem.uris[this.imageIndex];
-        },
-
-        getImageNameLetters() {
-            return this.getImageName.split('');
-        },
-
-        getCurrentlyDisplayedLetters() {
+        currentlyDisplayedLetters() {
             return this.lastLetterIndex >= 0 ?
-                this.getImageNameLetters.slice(0, this.lastLetterIndex + 1) : [];
+                this.imageNameLetters.slice(0, this.lastLetterIndex + 1) : [];
         }
     },
     mounted() {
         this.startSpelling()
-    },
-    beforeDestroy() {
-        this.isViewDestroyed = true;
     },
     methods: {
         async startSpelling() {
@@ -107,7 +76,7 @@ export default {
         },
 
         async spellWord() {
-            const letters = this.getImageNameLetters;
+            const letters = this.imageNameLetters;
             for (let i = 0; i < letters.length; i++) {
                 this.lastLetterIndex = i;
                 await this.sleep(2000);
@@ -125,7 +94,7 @@ export default {
         },
 
         closePopup() {
-            this.$emit('spellingFinished');
+            this.$store.commit('setSpellingState', false);
         }
     }
 }

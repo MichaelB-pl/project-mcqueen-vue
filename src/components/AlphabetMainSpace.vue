@@ -3,45 +3,44 @@
     <div 
         v-if="!isSelectedAnyImage" 
         class="alphabet__main-space-background-letter noselect" 
-        @click="$emit('backgroundLetterClicked')"
-    >{{ getDisplayedLetter }}</div>
+        @click="saySelectedLetter()"
+    >{{ backgroundLetter }}</div>
 
     <img 
         v-if="isSelectedAnyImage" 
-        :src="getSelectedImageUri"
-        @click="$emit('selectedImageClicked')"
+        :src="selectedImageUri"
+        @click="onImageClicked()"
     />
     </div>
 </template>
 
 <script>
-import AlphabetItem from '../models/alphabet/alphabet-item';
+import { mapGetters } from 'vuex';
+import {
+    playAudio,
+    getLettersAudioUri
+} from '../assets/audio/player';
 
 export default {
     name: 'AlphabetMainSpace',
-    props: {
-        alphabetItem: {
-            type: AlphabetItem,
-            required: true
-        },
-        imageIndex: {
-            type: Number,
-            required: true
-        }
-    },
     computed: {
-        isSelectedAnyImage() {
-            return this.imageIndex > -1;
-        },
-
-        getDisplayedLetter() {
-            const letter = this.alphabetItem.letter;
+        backgroundLetter() {
+            const letter = this.$store.getters.selectedAlphabetItem.letter;
             return `${letter.toUpperCase()}${letter.toLowerCase()}`;
         },
-
-        getSelectedImageUri() {
-            const uri = this.alphabetItem.uris[this.imageIndex];
-            return uri;
+        ...mapGetters([
+            'isSelectedAnyImage',
+            'selectedImageUri'
+        ]),
+    },
+    methods: {
+        onImageClicked(){
+            this.$store.commit('setAlphabetItemImageIndex', -1);
+        },
+        saySelectedLetter(){
+            const letter = this.$store.getters.selectedAlphabetItem.letter;
+            const src = getLettersAudioUri(letter, letter);
+            playAudio(src);
         }
     }
 }

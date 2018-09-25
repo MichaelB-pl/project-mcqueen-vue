@@ -15,6 +15,7 @@ import {
     playAudio,
     getLettersAudioUri
 } from '../assets/audio/player';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'AlphabetDialogMainSpace',
@@ -26,19 +27,14 @@ export default {
         isImageVisible: {
             type: Boolean,
             required: true
-        },
-        imageUri: {
-            type: String,
-            required: true
-        },
-        letter: {
-            type: String,
-            required: true
-        },
-        imageName: {
-            type: String,
-            required: true
         }
+    },
+    computed: {
+        ...mapGetters({
+            imageUri: 'selectedImageUri',
+            letter: 'selectedAlphabetItemLetter',
+            imageName: 'selectedImageName'
+        })
     },
     watch: {
         isImageVisible(val, oldVal) {
