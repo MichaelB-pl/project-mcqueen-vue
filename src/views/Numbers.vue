@@ -1,15 +1,20 @@
 <template>
 <div>
-
+    <NumbersCountBar />
 </div>
 </template>
 
 <script>
+import NumbersCountBar from '../components/NumbersCountBar.vue';
+
 export default {
-    name: 'Numbers'
+    name: 'Numbers',
+    components: {
+        NumbersCountBar
+    }
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>
