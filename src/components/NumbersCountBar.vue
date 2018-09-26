@@ -1,12 +1,18 @@
 <template>
 <div class="app-bar numbers__count-bar noselect">
-    <div v-for="number in numbersLowerAndEquealThanSelected" 
+    <div v-for="number in numbersLowerThanSelected" 
         :key="number"
         :class="'numbers__count-bar-item'"
         @click="onSelectedNumber(number)"
         >{{ number }}
     </div>
     
+    <div :key="selectedNumber"
+        :class="'numbers__count-bar-item numbers__count-bar-item-selected'"
+        @click="onSelectedNumber(selectedNumber)"
+        >{{ selectedNumber }}
+    </div>
+
     <div v-for="number in numbersHigherThanSelected" 
         :key="number"
         :class="'numbers__count-bar-item numbers__count-bar-item-not-selected'"
@@ -30,9 +36,9 @@ const {
 export default {
     name: 'NumbersCountBar',
     computed: {
-        numbersLowerAndEquealThanSelected(state) {
+        numbersLowerThanSelected(state) {
             return state.numbers.filter(number =>
-                number <= state.selectedNumber);
+                number < state.selectedNumber);
         },
         numbersHigherThanSelected(state) {
             return state.numbers.filter(number =>
@@ -67,17 +73,28 @@ export default {
 }
 
 .numbers__count-bar-item {
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: bolder;
+    transition: color var(--transition-duration), font-size var(--transition-duration);
+    color: #fffc;
+}
+
+.numbers__count-bar-item-selected {
+    font-size: 2.8em;
+    color: white;
 }
 
 .numbers__count-bar-item-not-selected {
-    color: #fff7;
+    color: #fff5;
 }
 
 @media(max-width: 480px){
     .numbers__count-bar-item {
         font-size: 1.5em;
     }
+
+.numbers__count-bar-item-selected {
+    font-size: 2.5em;
+}
 }
 </style>
