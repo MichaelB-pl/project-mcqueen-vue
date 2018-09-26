@@ -27,7 +27,8 @@ export default {
 }
 
 const pages = [
-    pageConstructor('Alfabet', '/alphabet')
+    pageConstructor('Alfabet', '/alphabet'),
+    pageConstructor('Cyfry', '/numbers')
 ];
 
 function pageConstructor(name, path) {
