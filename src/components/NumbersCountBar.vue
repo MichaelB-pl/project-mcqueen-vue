@@ -24,7 +24,7 @@
 
 <script>
 import {
-    createNamespacedHelpers, mapActions
+    createNamespacedHelpers
 } from 'vuex';
 
 const {
@@ -70,6 +70,7 @@ export default {
     flex-flow: row nowrap;
     justify-content: space-around;
     align-items: center;
+    z-index: 100;
 }
 
 .numbers__count-bar-item {

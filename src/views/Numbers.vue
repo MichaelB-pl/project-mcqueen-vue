@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="numbers">
     <NumbersCountBar />
     <NumbersMainSpace />
 </div>
@@ -19,5 +19,11 @@ export default {
 </script>
 
 <style>
-
+.numbers {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    
+}
 </style>
