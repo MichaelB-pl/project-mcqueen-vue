@@ -5,8 +5,13 @@
 </template>
 
 <script>
+import NumbersMainSpaceItem from './NumbersMainSpaceItem.vue';
+
 export default {
-    name: 'NumbersMainSpace'
+    name: 'NumbersMainSpace',
+    components: {
+        NumbersMainSpaceItem
+    }
 }
 </script>
 
