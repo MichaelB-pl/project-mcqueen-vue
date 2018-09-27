@@ -3,20 +3,20 @@
     <div v-for="number in numbersLowerThanSelected" 
         :key="number"
         :class="'numbers__count-bar-item'"
-        @click="onSelectedNumber(number)"
+        @click="onNumberSelected(number)"
         >{{ number }}
     </div>
     
     <div :key="selectedNumber"
         :class="'numbers__count-bar-item numbers__count-bar-item-selected'"
-        @click="onSelectedNumber(selectedNumber)"
+        @click="onNumberSelected(selectedNumber)"
         >{{ selectedNumber }}
     </div>
 
     <div v-for="number in numbersHigherThanSelected" 
         :key="number"
         :class="'numbers__count-bar-item numbers__count-bar-item-not-selected'"
-        @click="onSelectedNumber(number)"
+        @click="onNumberSelected(number)"
         >{{ number }}
     </div>
 </div>
@@ -52,7 +52,7 @@ export default {
         ]),
     },
     methods: {
-        onSelectedNumber(number) {
+        onNumberSelected(number) {
             const index =number - 1;
             this.selectNumberIndex(index);
         },
