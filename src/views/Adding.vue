@@ -1,13 +1,21 @@
 <template>
-    <div>
-
-    </div>
+<div>
+    <AddingQuestionSpace />
+    <AddingAnswerBar />
+</div>
 </template>
 
 <script>
-    export default {
-        name:'Adding'
+import AddingQuestionSpace from '../components/AddingQuestionSpace.vue';
+import AddingAnswerBar from '../components/AddingAnswerBar.vue';
+
+export default {
+    name: 'Adding',
+    components: {
+        AddingQuestionSpace,
+        AddingAnswerBar
     }
+}
 </script>
 
 <style scoped>
