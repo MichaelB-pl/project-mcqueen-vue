@@ -1,18 +1,18 @@
 <template>
 <div>
-    <AddingQuestionSpace />
+    <AddingPuzzleSpace />
     <AddingAnswerBar />
 </div>
 </template>
 
 <script>
-import AddingQuestionSpace from '../components/AddingQuestionSpace.vue';
+import AddingPuzzleSpace from '../components/AddingPuzzleSpace.vue';
 import AddingAnswerBar from '../components/AddingAnswerBar.vue';
 
 export default {
     name: 'Adding',
     components: {
-        AddingQuestionSpace,
+        AddingPuzzleSpace,
         AddingAnswerBar
     }
 }
