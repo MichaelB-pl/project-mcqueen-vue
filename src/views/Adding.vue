@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="adding">
     <AddingPuzzleSpace />
     <AddingAnswerBar />
 </div>
@@ -19,5 +19,10 @@ export default {
 </script>
 
 <style scoped>
-
+.adding{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+}
 </style>
